@@ -9,37 +9,38 @@ import {
     Platform,
     StyleSheet,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import firebase from'@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
-const SignInScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
+        displayName:'',
         username: '',
         password: '',
         confirm_password: '',
-        check_textInputChange: false,
+       // check_textInputChange: false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
+        isLoading:false
     });
 
     const textInputChange = (val) => {
-        if( val.length !== 0 ) {
+        if( val!==null ) {
             setData({
                 ...data,
                 username: val,
-                check_textInputChange: true
+              // check_textInputChange: true
             });
         } else {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: false
-            });
+            Alert.alert('Username & Password cannot be empty')
         }
     }
 
@@ -71,6 +72,49 @@ const SignInScreen = ({navigation}) => {
         });
     }
 
+    const registerUser=()=>{
+        if(data.username=='' && data.password==''){
+            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }else if(data.password !== data.confirm_password){
+            Alert.alert('Password Mismatch', 'make sure both passwords are equal.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
+        else{
+            setData({
+                isLoading:true
+            })
+            firebase.auth().createUserWithEmailAndPassword(data.username,data.password).then((res)=>{
+                res.user.updateProfile({
+                    displayName:data.displayName
+                })
+                console.log('User Registered successfully')
+                Alert.alert('User Registered successfully')
+                setData({
+                    displayName:'',
+                    username:'',
+                    password:'',
+                    confirm_password:'',
+                    //check_textInputChange: false,
+                    secureTextEntry: true,
+                    isValidUser: true,
+                    isValidPassword: true,
+                    isLoading:false
+                })
+            }).catch(error=>console.log(error),
+            Alert.alert('Registration Falied')
+            )
+            
+            
+
+        }
+
+    }
+
     return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
@@ -82,7 +126,7 @@ const SignInScreen = ({navigation}) => {
             style={styles.footer}
         >
             <ScrollView>
-            <Text style={styles.text_footer}>Email Address</Text>
+          {/*  <Text style={styles.text_footer}>Email Address</Text>
             <View style={styles.action}>
                 <Feather 
                     name="mail"
@@ -93,7 +137,7 @@ const SignInScreen = ({navigation}) => {
                     placeholder="Your Email Address"
                     style={styles.textInput}
                     autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
+                    //onChangeText={(val) => textInputChange(val)}
                 />
                 {data.check_textInputChange ? 
                 <Animatable.View
@@ -106,16 +150,16 @@ const SignInScreen = ({navigation}) => {
                     />
                 </Animatable.View>
                 : null}
-            </View>
-            <Text style={[styles.text_footer, {marginTop: 35}]}>Username</Text>
+                </View>*/}
+            <Text style={[styles.text_footer, {marginTop: 35}]}>Email</Text>
             <View style={styles.action}>
-                <FontAwesome 
-                    name="user-o"
+                <Feather 
+                    name="mail"
                     color="#05375a"
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Username"
+                    placeholder="Enter a valid Email Address"
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
@@ -213,7 +257,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {}}
+                    onPress={() => registerUser()}
                 >
                 <LinearGradient
                     colors={['#6E6E6E', '#585858']}
@@ -244,7 +288,7 @@ const SignInScreen = ({navigation}) => {
     );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
     container: {

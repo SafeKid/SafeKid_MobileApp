@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1064185719790",
+    "firebase_url": "https://safekid-demo-b3e44.firebaseio.com",
+    "project_id": "safekid-demo-b3e44",
+    "storage_bucket": "safekid-demo-b3e44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064185719790:android:d592425979c7fe07b1fcff",
+        "android_client_info": {
+          "package_name": "com.safekid_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064185719790-m5kng5gmnrslhveqq85r3fme2oc1g6ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeXBnugS7e5jP5Dn5v7nXrusWR7zvHqSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064185719790-m5kng5gmnrslhveqq85r3fme2oc1g6ta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

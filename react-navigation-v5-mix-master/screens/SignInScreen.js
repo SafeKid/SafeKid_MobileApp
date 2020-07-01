@@ -19,6 +19,8 @@ import { useTheme } from 'react-native-paper';
 import { AuthContext } from '../components/context';
 
 import Users from '../model/users';
+import firebase from'@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
 const SignInScreen = ({navigation}) => {
 
@@ -90,9 +92,9 @@ const SignInScreen = ({navigation}) => {
         }
     }
 
-    const loginHandle = (userName, password) => {
+   /* const loginHandle = (userName, password) => {
 
-        const foundUser = Users.filter( item => {
+      /*  const foundUser = Users.filter( item => {
             return userName == item.username && password == item.password;
         } );
 
@@ -109,7 +111,42 @@ const SignInScreen = ({navigation}) => {
             ]);
             return;
         }
-        signIn(foundUser);
+       
+    }*/
+
+    const userLogin=()=>{
+        if(data.username=='' && data.password==''){
+            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }else{
+            setData({
+                isLoading:true
+            })
+            firebase.auth().signInWithEmailAndPassword(data.username,data.password).then((res)=>{
+                console.log(res)
+                console.log('User Logged in Successfully')
+                Alert.alert('Login Success')
+                setData({
+                    displayName:'',
+                    username:'',
+                    password:'',
+                    check_textInputChange: false,
+                    secureTextEntry: true,
+                    isValidUser: true,
+                    isValidPassword: true,
+                    isLoading:false
+                })
+                signIn(Users.filter(item=>{return true}));
+            }).catch(error=>console.log(error),
+            Alert.alert('Invalid Username or Password')
+            )
+            
+            
+
+        }
+
     }
 
     return (
@@ -126,15 +163,15 @@ const SignInScreen = ({navigation}) => {
         >
             <Text style={[styles.text_footer, {
                 color: colors.text
-            }]}>Username</Text>
+            }]}>Email</Text>
             <View style={styles.action}>
-                <FontAwesome 
-                    name="user-o"
+                <Feather 
+                    name="mail"
                     color={colors.text}
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Username"
+                    placeholder="Your Email"
                     placeholderTextColor="#666666"
                     style={[styles.textInput, {
                         color: colors.text
@@ -213,7 +250,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {loginHandle( data.username, data.password )}}
+                    onPress={() => {userLogin()}}
                 >
                 <LinearGradient
                     colors={['#585858', '#2E2E2E']}

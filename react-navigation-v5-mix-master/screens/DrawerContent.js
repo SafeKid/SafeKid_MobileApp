@@ -19,13 +19,34 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import{ AuthContext } from '../components/context';
+import firebase from '@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
 export function DrawerContent(props) {
 
+      /* const [data, setData]=React.useState({
+           
+               displayName:'',
+               uid:''
+           
+       })*/
+    
     const paperTheme = useTheme();
 
     const { signOut, toggleTheme } = React.useContext(AuthContext);
 
+    const SignOut=()=>{
+        firebase.auth().signOut().then(()=>{
+            signOut();
+            
+        })
+        .catch(error=>console.log(error));
+    }
+    /*setData({ 
+        displayName: firebase.auth().currentUser.displayName,
+        uid: firebase.auth().currentUser.uid
+      });
+*/
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
@@ -39,8 +60,8 @@ export function DrawerContent(props) {
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>User</Title>
-                                <Caption style={styles.caption}>abc@gmail.com</Caption>
+                            <Title style={styles.title}>{firebase.auth().currentUser.email}</Title>
+                            <Caption style={styles.caption}>{firebase.auth().currentUser.uid}</Caption>
                             </View>
                         </View>
 
@@ -147,7 +168,7 @@ export function DrawerContent(props) {
                         />
                     )}
                     label="Sign Out"
-                    onPress={() => {signOut()}}
+                    onPress={() => {SignOut()}}
                 />
             </Drawer.Section>
         </View>
