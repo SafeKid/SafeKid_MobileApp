@@ -31,6 +31,7 @@ const SignInScreen = ({navigation}) => {
         secureTextEntry: true,
         isValidUser: true,
         isValidPassword: true,
+        isValidEmail:true
     });
 
     const { colors } = useTheme();
@@ -38,19 +39,21 @@ const SignInScreen = ({navigation}) => {
     const { signIn } = React.useContext(AuthContext);
 
     const textInputChange = (val) => {
-        if( val.trim().length >= 4 ) {
+        var re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        if( re.test(val)) {
             setData({
                 ...data,
                 username: val,
                 check_textInputChange: true,
-                isValidUser: true
+                isValidEmail: true
             });
         } else {
             setData({
                 ...data,
                 username: val,
                 check_textInputChange: false,
-                isValidUser: false
+                isValidEmail: false
             });
         }
     }
@@ -91,7 +94,7 @@ const SignInScreen = ({navigation}) => {
             });
         }
     }
-
+    
    /* const loginHandle = (userName, password) => {
 
       /*  const foundUser = Users.filter( item => {
@@ -140,7 +143,8 @@ const SignInScreen = ({navigation}) => {
                 })
                 signIn(Users.filter(item=>{return true}));
             }).catch(error=>console.log(error),
-            Alert.alert('Invalid Username or Password')
+           //setTimeout(5000),
+            Alert.alert('Invalid Login')
             )
             
             
@@ -192,9 +196,9 @@ const SignInScreen = ({navigation}) => {
                 </Animatable.View>
                 : null}
             </View>
-            { data.isValidUser ? null : 
+            { data.isValidEmail ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
+            <Text style={styles.errorMsg}>Email is badly formatted</Text>
             </Animatable.View>
             }
             
@@ -244,7 +248,7 @@ const SignInScreen = ({navigation}) => {
             }
             
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('ResetPasswordScreen')}>
                 <Text style={{color: '#2E2E2E', marginTop:15}}>Forgot password?</Text>
             </TouchableOpacity>
             <View style={styles.button}>

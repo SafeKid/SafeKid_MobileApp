@@ -29,33 +29,60 @@ const SignUpScreen = ({navigation}) => {
        // check_textInputChange: false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
-        isLoading:false
+        isLoading:false,
+        isValidEmail:true,
+        isValidPassword:true,
+        isValidConfirm_password:true
     });
 
+    
     const textInputChange = (val) => {
-        if( val!==null ) {
+        var re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if( re.test(val)) {
             setData({
                 ...data,
                 username: val,
               // check_textInputChange: true
+              isValidEmail:true
             });
         } else {
-            Alert.alert('Username & Password cannot be empty')
+            setData({
+                username:val,
+                isValidEmail:false
+            })
+            
         }
     }
 
     const handlePasswordChange = (val) => {
-        setData({
-            ...data,
-            password: val
-        });
+        if( val.trim().length >= 8 ) {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: true
+            });
+        } else {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: false
+            });
+        }
     }
-
     const handleConfirmPasswordChange = (val) => {
-        setData({
-            ...data,
-            confirm_password: val
-        });
+        if( val.trim().length >= 8 ) {
+            setData({
+                ...data,
+                confirm_password: val,
+                isValidConfirm_password: true
+            });
+        } else {
+            setData({
+                ...data,
+                confirm_password: val,
+                isValidConfirm_password: false
+            });
+        }
     }
 
     const updateSecureTextEntry = () => {
@@ -105,7 +132,9 @@ const SignUpScreen = ({navigation}) => {
                     isValidPassword: true,
                     isLoading:false
                 })
+                navigation.navigate('SignInScreen')
             }).catch(error=>console.log(error),
+           // setTimeout(5000),
             Alert.alert('Registration Falied')
             )
             
@@ -176,6 +205,11 @@ const SignUpScreen = ({navigation}) => {
                 </Animatable.View>
                 : null}
             </View>
+            { data.isValidEmail ? null : 
+            <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Email is badly formatted</Text>
+            </Animatable.View>
+            }
 
             <Text style={[styles.text_footer, {
                 marginTop: 35
@@ -211,7 +245,11 @@ const SignUpScreen = ({navigation}) => {
                     }
                 </TouchableOpacity>
             </View>
-
+            { data.isValidPassword ? null : 
+            <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            </Animatable.View>
+            }
             <Text style={[styles.text_footer, {
                 marginTop: 35
             }]}>Confirm Password</Text>
@@ -228,6 +266,7 @@ const SignUpScreen = ({navigation}) => {
                     autoCapitalize="none"
                     onChangeText={(val) => handleConfirmPasswordChange(val)}
                 />
+            
                 <TouchableOpacity
                     onPress={updateConfirmSecureTextEntry}
                 >
@@ -245,7 +284,13 @@ const SignUpScreen = ({navigation}) => {
                     />
                     }
                 </TouchableOpacity>
-            </View>
+           </View>
+           { data.isValidConfirm_password ? null : 
+                    <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+                    </Animatable.View>
+                    }
+
             <View style={styles.textPrivate}>
                 <Text style={styles.color_textPrivate}>
                     By signing up you agree to our
@@ -313,6 +358,10 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 30
+    },
+    errorMsg: {
+        color: '#FF0000',
+        fontSize: 14,
     },
     text_footer: {
         color: '#05375a',
