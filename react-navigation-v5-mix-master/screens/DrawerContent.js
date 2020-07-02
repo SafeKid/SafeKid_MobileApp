@@ -143,7 +143,7 @@ export function DrawerContent(props) {
                                 />
                             )}
                             label="User Reviews"
-                            onPress={() => {props.navigation.navigate('SettingScreen')}}
+                            onPress={() => {props.navigation.navigate('ReviewScreen')}}
                         />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">

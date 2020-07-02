@@ -56,10 +56,13 @@ const SignInScreen = ({navigation}) => {
                 isValidEmail: false
             });
         }
+    
     }
 
     const handlePasswordChange = (val) => {
-        if( val.trim().length >= 8 ) {
+
+        
+        if( val.trim().length >= 8) {
             setData({
                 ...data,
                 password: val,
@@ -72,6 +75,7 @@ const SignInScreen = ({navigation}) => {
                 isValidPassword: false
             });
         }
+    
     }
 
     const updateSecureTextEntry = () => {
@@ -81,7 +85,7 @@ const SignInScreen = ({navigation}) => {
         });
     }
 
-    const handleValidUser = (val) => {
+  /*  const handleValidUser = (val) => {
         if( val.trim().length >= 4 ) {
             setData({
                 ...data,
@@ -93,7 +97,7 @@ const SignInScreen = ({navigation}) => {
                 isValidUser: false
             });
         }
-    }
+    }*/
     
    /* const loginHandle = (userName, password) => {
 
@@ -118,12 +122,18 @@ const SignInScreen = ({navigation}) => {
     }*/
 
     const userLogin=()=>{
-        if(data.username=='' && data.password==''){
-            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+        if(data.username=='' || data.password==''){
+            Alert.alert('Wrong Input!', 'Email or Password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
             return;
-        }else{
+        }else if(data.username==null || data.password==null){
+            Alert.alert('Login Failed.', 'Make sure you entered credentials correctly.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
+        else{
             setData({
                 isLoading:true
             })
@@ -142,12 +152,15 @@ const SignInScreen = ({navigation}) => {
                     isLoading:false
                 })
                 signIn(Users.filter(item=>{return true}));
-            }).catch(error=>console.log(error),
+            }).catch(error=>{
+                navigation.navigate('SplashScreen')
+                navigation.navigate('SignInScreen')
+                alert(error.message)
+            },
            //setTimeout(5000),
-            Alert.alert('Invalid Login')
+           //Alert.alert(error)
+            
             )
-            
-            
 
         }
 
@@ -181,8 +194,8 @@ const SignInScreen = ({navigation}) => {
                         color: colors.text
                     }]}
                     autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
-                    onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+                    onChangeText={(val) =>textInputChange(val)}
+                    //onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                 />
                 {data.check_textInputChange ? 
                 <Animatable.View

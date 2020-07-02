@@ -100,8 +100,8 @@ const SignUpScreen = ({navigation}) => {
     }
 
     const registerUser=()=>{
-        if(data.username=='' && data.password==''){
-            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+        if((data.username=='' || data.password=='')||(data.username==null || data.password==null)){
+            Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
             return;
@@ -133,9 +133,14 @@ const SignUpScreen = ({navigation}) => {
                     isLoading:false
                 })
                 navigation.navigate('SignInScreen')
-            }).catch(error=>console.log(error),
-           // setTimeout(5000),
-            Alert.alert('Registration Falied')
+            }).catch(error=>{
+                navigation.navigate('SplashScreen')
+                navigation.navigate('SignUpScreen')
+                alert(error.message)
+            },
+           //setTimeout(5000),
+           //Alert.alert(error)
+            
             )
             
             

@@ -10,6 +10,7 @@ import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
 import ProfileScreen from './ProfileScreen';
 
+
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 const ProfileStack= createStackNavigator();

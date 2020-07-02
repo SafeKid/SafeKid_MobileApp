@@ -20,7 +20,7 @@ import firebase from'@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import { color } from 'react-native-reanimated';
 
-const SupportScreen = ({navigation}) => {
+const AddReviewScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
         name:'',
@@ -59,8 +59,7 @@ const SupportScreen = ({navigation}) => {
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Need a Help? Contact us.</Text>
-            <Text style={{color:'white'}}>**Message is sent to administrator**</Text>
+            <Text style={styles.text_header}>Add Your Comments</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"
@@ -167,7 +166,7 @@ const SupportScreen = ({navigation}) => {
     );
 };
 
-export default SupportScreen;
+export default AddReviewScreen;
 
 const styles = StyleSheet.create({
     container: {
