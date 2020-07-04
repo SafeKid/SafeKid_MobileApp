@@ -64,8 +64,10 @@ const textInputChange = (val) => {
 
 const ResetEmail=()=>{
     firebase.auth().sendPasswordResetEmail(data.username).then(()=>{
-    Alert.alert('Reset Email Sent!   Check your mails')
-    }).catch(error=>{console.log(error)});
+    Alert.alert('Reset Email Sent.','Please check your Email')
+    }).catch(error=>{console.log(error),
+    alert(error.message)
+    });
     
 }
 
@@ -73,7 +75,7 @@ const ResetEmail=()=>{
         <View style={styles.container}>
             <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
           <View style={styles.header}>
-              <Text style={styles.text_header}>Enter Your Account Email</Text>
+              <Text style={styles.text_header}>Reset Password</Text>
           </View>
           <Animatable.View 
               animation="fadeInUpBig"
@@ -91,7 +93,7 @@ const ResetEmail=()=>{
                       size={20}
                   />
                   <TextInput 
-                      placeholder="Your Email"
+                      placeholder="Please Enter your Account Email"
                       placeholderTextColor="#666666"
                       style={[styles.textInput, {
                           color: colors.text

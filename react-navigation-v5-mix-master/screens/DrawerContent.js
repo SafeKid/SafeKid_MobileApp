@@ -38,7 +38,7 @@ export function DrawerContent(props) {
     const SignOut=()=>{
         firebase.auth().signOut().then(()=>{
             signOut();
-            
+            console.log('SignOut Success')
         })
         .catch(error=>console.log(error));
     }
@@ -60,8 +60,8 @@ export function DrawerContent(props) {
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
+                            <Caption style={styles.caption}>user logged in as</Caption>
                             <Title style={styles.title}>{firebase.auth().currentUser.email}</Title>
-                            <Caption style={styles.caption}>{firebase.auth().currentUser.uid}</Caption>
                             </View>
                         </View>
 
@@ -89,17 +89,7 @@ export function DrawerContent(props) {
                             label="Home"
                             onPress={() => {props.navigation.navigate('Home')}}
                         />
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                                <Icon 
-                                name="account-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )}
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('Profile')}}
-                        />
+                       
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 

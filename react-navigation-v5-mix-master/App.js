@@ -28,6 +28,7 @@ import SupportScreen from './screens/SupportScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
 import ReviewScreen from './screens/ReviewScreen';
+import QA_Screen from './screens/QA_Screen';
 
 import { AuthContext } from './components/context';
 
@@ -176,6 +177,7 @@ const App = () => {
           <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />
           <Drawer.Screen name="ReviewScreen" component={ReviewScreen}/>
           <Drawer.Screen name="AddReviewScreen" component={AddReviewScreen}/>
+          <Drawer.Screen name="QA_Screen" component={QA_Screen}/>
         </Drawer.Navigator>
       )
     :

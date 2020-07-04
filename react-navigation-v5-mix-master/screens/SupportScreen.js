@@ -23,6 +23,7 @@ import { color } from 'react-native-reanimated';
 const SupportScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
+        user:'',
         name:'',
         title: '',
         description: '',
@@ -34,6 +35,7 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 name: val,
+                user:firebase.auth().currentUser.email
             });
         }
     
@@ -43,6 +45,7 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 title: val,
+                user:firebase.auth().currentUser.email
               });
       }
 
@@ -51,9 +54,37 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 description: val,
+                user:firebase.auth().currentUser.email
             });
        
       
+    }
+
+  
+    const sendMessage=()=>{
+        firebase.database().ref('Questions').push(
+            {
+                user:data.user,
+                name:data.name,
+                title:data.title,
+                description:data.description
+
+            }
+        ).then(() => {
+            console.log('INSERTED !')
+            Alert.alert('Message Sent Successfully')
+            
+            setData({
+                user:firebase.auth().currentUser.email,
+                name:'',
+                title:'',
+                description:''
+            })
+        
+            
+        }).catch((error) => {
+            console.log(error);
+        });
     }
         return (
       <View style={styles.container}>
@@ -79,6 +110,7 @@ const SupportScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handleNameChange(val)}
+                    value={data.name}
                 />
                
             </View>
@@ -102,6 +134,7 @@ const SupportScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handleTitleChange(val)}
+                    value={data.title}
                 />
                 
             </View>
@@ -126,6 +159,7 @@ const SupportScreen = ({navigation}) => {
                     numberOfLines={20}
                     multiline={true}
                     onChangeText={(val) => handleDescriptionChange(val)}
+                    value={data.description}
                 />
             
                
@@ -146,6 +180,19 @@ const SupportScreen = ({navigation}) => {
                         color:'#fff'
                     }]}>Send</Text>
                 </LinearGradient>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("QA_Screen")}
+                    style={[styles.signIn, {
+                        borderColor: '#6E6E6E',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: '#6E6E6E'
+                    }]}>sent Messages</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity

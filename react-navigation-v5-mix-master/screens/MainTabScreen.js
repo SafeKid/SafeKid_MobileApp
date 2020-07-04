@@ -8,12 +8,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
-import ProfileScreen from './ProfileScreen';
+import NewsScreen from './NewsScreen';
 
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
-const ProfileStack= createStackNavigator();
+const NewsStack= createStackNavigator();
 const ExploreStack=createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
@@ -46,8 +46,8 @@ const MainTabScreen = () => (
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileStackScreen}
+        name="News"
+        component={NewsStackScreen}
         options={{
           tabBarLabel: 'News Feed',
           tabBarColor: '#585858',
@@ -109,8 +109,8 @@ const DetailsStackScreen = ({navigation}) => (
 </DetailsStack.Navigator>
 );
 
-const ProfileStackScreen = ({navigation}) => (
-  <ProfileStack.Navigator screenOptions={{
+const NewsStackScreen = ({navigation}) => (
+  <NewsStack.Navigator screenOptions={{
           headerStyle: {
           backgroundColor: '#585858',
           },
@@ -119,12 +119,12 @@ const ProfileStackScreen = ({navigation}) => (
           fontWeight: 'bold'
           }
       }}>
-          <ProfileStack.Screen name="News Feed" component={ProfileScreen} options={{
+          <NewsStack.Screen name="News Feed" component={NewsScreen} options={{
           headerLeft: () => (
               <Icon.Button name="ios-menu" size={25} backgroundColor="#585858" onPress={() => navigation.openDrawer()}></Icon.Button>
           )
           }} />
-  </ProfileStack.Navigator>
+  </NewsStack.Navigator>
   );
   
   const ExploreStackScreen = ({navigation}) => (

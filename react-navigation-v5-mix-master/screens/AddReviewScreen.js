@@ -18,6 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import firebase from'@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import { color } from 'react-native-reanimated';
 
 const AddReviewScreen = ({navigation}) => {
@@ -55,6 +56,8 @@ const AddReviewScreen = ({navigation}) => {
        
       
     }
+
+   
         return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
