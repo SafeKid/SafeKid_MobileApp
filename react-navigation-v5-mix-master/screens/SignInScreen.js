@@ -148,6 +148,7 @@ const SignInScreen = ({navigation}) => {
                     check_textInputChange: false,
                     secureTextEntry: true,
                     isValidUser: true,
+                    isValidEmail:true,
                     isValidPassword: true,
                     isLoading:false
                 })

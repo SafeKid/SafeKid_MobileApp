@@ -109,7 +109,7 @@ export function DrawerContent(props) {
                                 size={size}
                                 />
                             )}
-                            label="Devices & Settings"
+                            label="Manage Devices"
                             onPress={() => {props.navigation.navigate('BookmarkScreen')}}
                         />
                         
