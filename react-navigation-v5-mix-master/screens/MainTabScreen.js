@@ -28,7 +28,7 @@ const MainTabScreen = () => (
         component={HomeStackScreen}
         options={{
           tabBarLabel: 'Home',
-          tabBarColor: '#585858',
+          tabBarColor: '#1C1C1C',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-home" color={color} size={26} />
           ),
@@ -39,7 +39,7 @@ const MainTabScreen = () => (
         component={DetailsStackScreen}
         options={{
           tabBarLabel: 'Notifications',
-          tabBarColor: '#585858',
+          tabBarColor: '#1C1C1C',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-notifications" color={color} size={26} />
           ),
@@ -50,7 +50,7 @@ const MainTabScreen = () => (
         component={NewsStackScreen}
         options={{
           tabBarLabel: 'News Feed',
-          tabBarColor: '#585858',
+          tabBarColor: '#1C1C1C',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-paper" color={color} size={26} />
           ),
@@ -61,7 +61,7 @@ const MainTabScreen = () => (
         component={ExploreStackScreen}
         options={{
           tabBarLabel: 'Location',
-          tabBarColor: '#585858',
+          tabBarColor: '#1C1C1C',
           tabBarIcon: ({ color }) => (
             <Icon name="ios-pin" color={color} size={26} />
           ),
@@ -75,7 +75,7 @@ export default MainTabScreen;
 const HomeStackScreen = ({navigation}) => (
 <HomeStack.Navigator screenOptions={{
         headerStyle: {
-        backgroundColor: '#585858',
+        backgroundColor: '#1C1C1C',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -85,7 +85,7 @@ const HomeStackScreen = ({navigation}) => (
         <HomeStack.Screen name="Home" component={HomeScreen} options={{
         title:'Overview',
         headerLeft: () => (
-            <Icon.Button name="ios-menu" size={25} backgroundColor="#585858" onPress={() => navigation.openDrawer()}></Icon.Button>
+            <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
         )
         }} />
 </HomeStack.Navigator>
@@ -94,7 +94,7 @@ const HomeStackScreen = ({navigation}) => (
 const DetailsStackScreen = ({navigation}) => (
 <DetailsStack.Navigator screenOptions={{
         headerStyle: {
-        backgroundColor: '#585858',
+        backgroundColor: '#1C1C1C',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -103,7 +103,7 @@ const DetailsStackScreen = ({navigation}) => (
     }}>
         <DetailsStack.Screen name="Notifications" component={DetailsScreen} options={{
         headerLeft: () => (
-            <Icon.Button name="ios-menu" size={25} backgroundColor="#585858" onPress={() => navigation.openDrawer()}></Icon.Button>
+            <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
         )
         }} />
 </DetailsStack.Navigator>
@@ -112,7 +112,7 @@ const DetailsStackScreen = ({navigation}) => (
 const NewsStackScreen = ({navigation}) => (
   <NewsStack.Navigator screenOptions={{
           headerStyle: {
-          backgroundColor: '#585858',
+          backgroundColor: '#1C1C1C',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -121,7 +121,7 @@ const NewsStackScreen = ({navigation}) => (
       }}>
           <NewsStack.Screen name="News Feed" component={NewsScreen} options={{
           headerLeft: () => (
-              <Icon.Button name="ios-menu" size={25} backgroundColor="#585858" onPress={() => navigation.openDrawer()}></Icon.Button>
+              <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
           )
           }} />
   </NewsStack.Navigator>
@@ -130,7 +130,7 @@ const NewsStackScreen = ({navigation}) => (
   const ExploreStackScreen = ({navigation}) => (
     <ExploreStack.Navigator screenOptions={{
             headerStyle: {
-            backgroundColor: '#585858',
+            backgroundColor: '#1C1C1C',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -139,7 +139,7 @@ const NewsStackScreen = ({navigation}) => (
         }}>
             <ExploreStack.Screen name="Location" component={ExploreScreen} options={{
             headerLeft: () => (
-                <Icon.Button name="ios-menu" size={25} backgroundColor="#585858" onPress={() => navigation.openDrawer()}></Icon.Button>
+                <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
             )
             }} />
     </ExploreStack.Navigator>

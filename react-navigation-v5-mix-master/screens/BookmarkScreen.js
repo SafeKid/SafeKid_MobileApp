@@ -100,7 +100,7 @@ render(){
       // </View>
 
       <View style={styles.container}>
-        <View style={{backgroundColor:'#2E2E2E', height:50, marginBottom:10}}>
+        <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
           <Text style={styles.Header_text}>Your Devices</Text>
         </View>
       <ScrollView>
@@ -139,7 +139,7 @@ render(){
                     onPress={() =>this.props.navigation.navigate('AddDevicesScreen')}
                 >
                 <LinearGradient
-                    colors={['#585858', '#2E2E2E']}
+                    colors={['#1C1C1C', '#151515']}
                     style={styles.signIn1}
                 >
                     <Text style={[styles.textSign, {
@@ -152,7 +152,7 @@ render(){
                     onPress={() =>this.props.navigation.goBack()}
                 >
                 <LinearGradient
-                    colors={['#585858', '#2E2E2E']}
+                    colors={['#1C1C1C', '#000000']}
                     style={styles.signIn1}
                 >
                     <Text style={[styles.textSign, {

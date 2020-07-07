@@ -96,7 +96,7 @@ render(){
                     onPress={() =>this.props.navigation.goBack()}
                 >
                 <LinearGradient
-                    colors={['#585858', '#2E2E2E']}
+                    colors={['#2E2E2E', '#151515']}
                     style={styles.signIn1}
                 >
                     <Text style={[styles.textSign, {

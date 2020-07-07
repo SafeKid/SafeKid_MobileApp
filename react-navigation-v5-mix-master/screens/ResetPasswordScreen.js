@@ -73,7 +73,7 @@ const ResetEmail=()=>{
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
+            <StatusBar backgroundColor='#151515' barStyle="light-content"/>
           <View style={styles.header}>
               <Text style={styles.text_header}>Reset Password</Text>
           </View>
@@ -128,7 +128,7 @@ const ResetEmail=()=>{
                       onPress={() => {ResetEmail()}}
                   >
                   <LinearGradient
-                      colors={['#585858', '#2E2E2E']}
+                      colors={['#585858', '#000000']}
                       style={styles.signIn}
                   >
                       <Text style={[styles.textSign, {
@@ -140,7 +140,7 @@ const ResetEmail=()=>{
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignInScreen')}
                     style={[styles.signIn, {
-                        borderColor: '#585858',
+                        borderColor: '#151515',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
@@ -161,7 +161,7 @@ const ResetEmail=()=>{
   const styles = StyleSheet.create({
       container: {
         flex: 1, 
-        backgroundColor: '#585858'
+        backgroundColor: '#2E2E2E'
       },
       header: {
           flex: 1,

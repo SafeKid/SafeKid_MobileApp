@@ -151,7 +151,7 @@ const SignUpScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
+          <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Register Now!</Text>
         </View>
@@ -196,6 +196,7 @@ const SignUpScreen = ({navigation}) => {
                     placeholder="Enter a valid Email Address"
                     style={styles.textInput}
                     autoCapitalize="none"
+                    keyboardType="email-address"
                     onChangeText={(val) => textInputChange(val)}
                 />
                 {data.check_textInputChange ? 
@@ -227,7 +228,7 @@ const SignUpScreen = ({navigation}) => {
                 />
                 <TextInput 
                     placeholder="Your Password"
-                    secureTextEntry={data.secureTextEntry ? true : false}
+                    secureTextEntry={data.secureTextEntry ? false : true}
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handlePasswordChange(val)}
@@ -266,7 +267,7 @@ const SignUpScreen = ({navigation}) => {
                 />
                 <TextInput 
                     placeholder="Confirm Your Password"
-                    secureTextEntry={data.confirm_secureTextEntry ? true : false}
+                    secureTextEntry={data.confirm_secureTextEntry ? false : true}
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handleConfirmPasswordChange(val)}
@@ -310,7 +311,7 @@ const SignUpScreen = ({navigation}) => {
                     onPress={() => registerUser()}
                 >
                 <LinearGradient
-                    colors={['#6E6E6E', '#585858']}
+                    colors={['#585858', '#000000']}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
@@ -322,13 +323,13 @@ const SignUpScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#1C1C1C',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#6E6E6E'
+                        color: '#585858'
                     }]}>Back to Log In</Text>
                 </TouchableOpacity>
             </View>
@@ -343,7 +344,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#585858'
+      backgroundColor: '#1C1C1C'
     },
     header: {
         flex: 1,

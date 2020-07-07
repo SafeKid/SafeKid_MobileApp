@@ -62,7 +62,7 @@ const SignInScreen = ({navigation}) => {
     const handlePasswordChange = (val) => {
 
         
-        if( val.trim().length >= 8) {
+        if( (val.trim().length >= 8)) {
             setData({
                 ...data,
                 password: val,
@@ -122,6 +122,7 @@ const SignInScreen = ({navigation}) => {
     }*/
 
     const userLogin=()=>{
+
         if(data.username=='' || data.password==''){
             Alert.alert('Wrong Input!', 'Email or Password field cannot be empty.', [
                 {text: 'Okay'}
@@ -169,7 +170,7 @@ const SignInScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
+          <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Login To Continue!</Text>
         </View>
@@ -195,6 +196,7 @@ const SignInScreen = ({navigation}) => {
                         color: colors.text
                     }]}
                     autoCapitalize="none"
+                    keyboardType="email-address"
                     onChangeText={(val) =>textInputChange(val)}
                     //onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                 />
@@ -271,7 +273,7 @@ const SignInScreen = ({navigation}) => {
                     onPress={() => {userLogin()}}
                 >
                 <LinearGradient
-                    colors={['#585858', '#2E2E2E']}
+                    colors={['#585858', '#000000']}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
@@ -283,7 +285,7 @@ const SignInScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUpScreen')}
                     style={[styles.signIn, {
-                        borderColor: '#585858',
+                        borderColor: '#1C1C1C',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
@@ -303,7 +305,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#585858'
+      backgroundColor: '#1C1C1C'
     },
     header: {
         flex: 1,
