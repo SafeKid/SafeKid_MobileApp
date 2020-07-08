@@ -63,12 +63,26 @@ const textInputChange = (val) => {
 }
 
 const ResetEmail=()=>{
+
+
+
+    if(data.username==''){
+        Alert.alert('Wrong Input!', 'Email field cannot be empty.', [
+            {text: 'Okay'}
+        ]);
+        return;
+    }else if(data.username==null){
+        Alert.alert('Sending Failed.', 'Make sure you entered email correctly.', [
+            {text: 'Okay'}
+        ]);
+        return;
+    }else{  
     firebase.auth().sendPasswordResetEmail(data.username).then(()=>{
     Alert.alert('Reset Email Sent.','Please check your Email')
     }).catch(error=>{console.log(error),
     alert(error.message)
     });
-    
+}
 }
 
     return (

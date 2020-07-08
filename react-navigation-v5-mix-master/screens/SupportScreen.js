@@ -27,6 +27,7 @@ const SupportScreen = ({navigation}) => {
         name:'',
         title: '',
         description: '',
+        respond:''
         
     });
 
@@ -62,12 +63,22 @@ const SupportScreen = ({navigation}) => {
 
   
     const sendMessage=()=>{
+
+        if((data.description=='')){
+            Alert.alert("Sending Failed","You must enter the description")
+             return;
+        
+    }else if((data.description==null)){
+        Alert.alert("Sending Failed","You must enter the description")
+        return;
+        }else{
         firebase.database().ref('Questions').push(
             {
                 user:data.user,
                 name:data.name,
                 title:data.title,
-                description:data.description
+                description:data.description,
+                respond:data.respond
 
             }
         ).then(() => {
@@ -78,7 +89,8 @@ const SupportScreen = ({navigation}) => {
                 user:firebase.auth().currentUser.email,
                 name:'',
                 title:'',
-                description:''
+                description:'',
+                respond:''
             })
         
             
@@ -86,12 +98,13 @@ const SupportScreen = ({navigation}) => {
             console.log(error);
         });
     }
+    }
         return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Need a Help? Contact us.</Text>
-            <Text style={{color:'white'}}>**Message is sent to administrator**</Text>
+            <Text style={styles.text_header}>Need a Help or have complains? Contact us.</Text>
+            <Text style={{color:'white'}}>**Message is sent to administrators**</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"
@@ -122,7 +135,7 @@ const SupportScreen = ({navigation}) => {
 
             <Text style={[styles.text_footer, {
                 marginTop: 35
-            }]}>Title</Text>
+            }]}>Problem Title</Text>
             <View style={styles.action}>
                 <Feather 
                     name="feather"
@@ -145,7 +158,7 @@ const SupportScreen = ({navigation}) => {
             */}
             <Text style={[styles.text_footer, {
                 marginTop: 35
-            }]}>Description</Text>
+            }]}>Description<Text style={{color:'#610B0B', fontSize:12}}>     **Required</Text></Text>
             <View style={styles.action}>
                 <Feather 
                     name="clipboard"
@@ -173,7 +186,7 @@ const SupportScreen = ({navigation}) => {
                     onPress={() => sendMessage()}
                 >
                 <LinearGradient
-                    colors={['#6E6E6E', '#585858']}
+                    colors={['#424242', '#151515']}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
@@ -185,26 +198,26 @@ const SupportScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate("QA_Screen")}
                     style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#424242',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#6E6E6E'
-                    }]}>sent Messages</Text>
+                        color: '#424242'
+                    }]}>Sent Messages</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#424242',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#6E6E6E'
+                        color: '#424242'
                     }]}>Back</Text>
                 </TouchableOpacity>
             </View>
@@ -219,13 +232,15 @@ export default SupportScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#585858'
+      backgroundColor: '#1C1C1C'
     },
     header: {
         flex: 1,
         justifyContent: 'flex-end',
         paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingTop: 20,
+        paddingBottom:30,
+        
     },
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
@@ -238,7 +253,9 @@ const styles = StyleSheet.create({
     text_header: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 25,
+        fontStyle:"italic"
+
         
     },
     errorMsg: {

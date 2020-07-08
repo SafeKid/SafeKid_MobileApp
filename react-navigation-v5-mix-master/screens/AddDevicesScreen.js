@@ -271,7 +271,7 @@ const AddDevicesScreen = ({navigation}) => {
                     onPress={() => sendRequest()}
                 >
                 <LinearGradient
-                    colors={['#6E6E6E', '#585858']}
+                    colors={['#424242', '#151515']}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
@@ -283,13 +283,13 @@ const AddDevicesScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#424242',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#6E6E6E'
+                        color: '#424242'
                     }]}>Back</Text>
                 </TouchableOpacity>
             </View>
@@ -304,7 +304,7 @@ export default AddDevicesScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#585858'
+      backgroundColor: '#2E2E2E'
     },
     header: {
         flex: 1,
@@ -328,8 +328,8 @@ const styles = StyleSheet.create({
         
     },
     errorMsg: {
-        color: '#FF0000',
-        fontSize: 14,
+        color: '#610B0B',
+        fontSize: 12,
     },
     text_footer: {
         color: '#05375a',

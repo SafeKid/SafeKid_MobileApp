@@ -212,7 +212,7 @@ const SignInScreen = ({navigation}) => {
                 </Animatable.View>
                 : null}
             </View>
-            { data.isValidEmail ? null : 
+            { ((data.isValidEmail==true)||data.username==null ) ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>Email is badly formatted</Text>
             </Animatable.View>
@@ -232,7 +232,7 @@ const SignInScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Your Password"
                     placeholderTextColor="#666666"
-                    secureTextEntry={data.secureTextEntry ? true : false}
+                    secureTextEntry={((data.secureTextEntry ==true)||(data.password==null)) ? true : false}
                     style={[styles.textInput, {
                         color: colors.text
                     }]}
@@ -257,7 +257,7 @@ const SignInScreen = ({navigation}) => {
                     }
                 </TouchableOpacity>
             </View>
-            { data.isValidPassword ? null : 
+            { ((data.isValidPassword==true)||data.password==null )? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
             </Animatable.View>

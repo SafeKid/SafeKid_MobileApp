@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert,ImageBackground } from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
@@ -27,6 +27,7 @@ componentDidMount(){
           name:child.val().name,
           title:child.val().title,
           description:child.val().description,
+        //  respond:child.val().respond,
           _key:child.key
         });
       });
@@ -60,13 +61,15 @@ render(){
       //   />
       // </View>
 
+
+      <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
       <ScrollView>
         {/*Loop of JS which is like foreach loop*/}
         {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#A4A4A4', borderColor:'black', borderWidth:2}}>
+          <View key={key} style={{backgroundColor:'#CED8F6', borderColor:'black', borderWidth:2,margin:5}}>
             <Text>To admin:-</Text>
             <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>
@@ -78,7 +81,7 @@ render(){
                         borderWidth: 2,
                         marginBottom:2,
                         marginLeft:280,
-                        backgroundColor:'#B40404',
+                        backgroundColor:'#8A0808',
                         padding:15
                        
                     }]}
@@ -105,6 +108,7 @@ render(){
                 </LinearGradient>
                 </TouchableOpacity>
     </View>
+    </ImageBackground>
 
     );
         }

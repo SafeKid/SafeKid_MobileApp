@@ -22,10 +22,10 @@ componentDidMount(){
       let dataList=[]
       snapshot.forEach((child) => {
         dataList.push({
-          city:child.key,
+          city:child.val(),
           village:child.key,
           date:child.key,
-          description:child.val()
+          description:child.key
           
         });
       });

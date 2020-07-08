@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   }
 });*/
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground} from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
@@ -98,12 +98,14 @@ render(){
       //     onPress={() => alert('Button Clicked!')}
       //   />
       // </View>
-
+      <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
         <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
           <Text style={styles.Header_text}>Your Devices</Text>
         </View>
+       
       <ScrollView>
+      
         {/*Loop of JS which is like foreach loop*/}
         {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
           //key is the index of the array 
@@ -133,6 +135,7 @@ render(){
             <View style={styles.separator} />
           </View>:null
         ))}
+        
       </ScrollView>
       <TouchableOpacity
                     style={styles.signIn, {marginBottom:10,width:200, marginLeft:100}}
@@ -160,7 +163,9 @@ render(){
                     }]}>Back</Text>
                 </LinearGradient>
                 </TouchableOpacity>
+               
     </View>
+    </ImageBackground>
 
     );
         }
