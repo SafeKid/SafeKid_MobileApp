@@ -22,8 +22,10 @@ import auth from '@react-native-firebase/auth';
 const SignUpScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
-        displayName:'',
-        username: '',
+        
+        role:'U',
+        name:'',
+        email: '',
         password: '',
         confirm_password: '',
        // check_textInputChange: false,
@@ -41,17 +43,29 @@ const SignUpScreen = ({navigation}) => {
         if( re.test(val)) {
             setData({
                 ...data,
-                username: val,
+                email: val,
               // check_textInputChange: true
-              isValidEmail:true
+              isValidEmail:true,
+              name:data.name,
+              role:'U'
             });
         } else {
             setData({
-                username:val,
-                isValidEmail:false
+                email:val,
+                isValidEmail:false,
+                name:data.name,
+                role:'U'
             })
             
         }
+    }
+
+    const nameInputChange=(val)=>{
+        setData({
+            ...data,
+            name:val,
+            role:'U'
+        });
     }
 
     const handlePasswordChange = (val) => {
@@ -59,13 +73,17 @@ const SignUpScreen = ({navigation}) => {
             setData({
                 ...data,
                 password: val,
-                isValidPassword: true
+                isValidPassword: true,
+                name:data.name,
+                role:'U'
             });
         } else {
             setData({
                 ...data,
                 password: val,
-                isValidPassword: false
+                isValidPassword: false,
+                name:data.name,
+                role:'U'
             });
         }
     }
@@ -74,13 +92,17 @@ const SignUpScreen = ({navigation}) => {
             setData({
                 ...data,
                 confirm_password: val,
-                isValidConfirm_password: true
+                isValidConfirm_password: true,
+                name:data.name,
+                role:'U'
             });
         } else {
             setData({
                 ...data,
                 confirm_password: val,
-                isValidConfirm_password: false
+                isValidConfirm_password: false,
+                name:data.name,
+                role:'U'
             });
         }
     }
@@ -100,7 +122,7 @@ const SignUpScreen = ({navigation}) => {
     }
 
     const registerUser=()=>{
-        if((data.username=='' || data.password=='')||(data.username==null || data.password==null)){
+        if((data.email=='' || data.password=='')||(data.email==null || data.password==null)){
             Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
@@ -115,15 +137,21 @@ const SignUpScreen = ({navigation}) => {
             setData({
                 isLoading:true
             })
-            firebase.auth().createUserWithEmailAndPassword(data.username,data.password).then((res)=>{
-                res.user.updateProfile({
-                    displayName:data.displayName
+            firebase.auth().createUserWithEmailAndPassword(data.email,data.password).then((res)=>{
+                // res.user.updateProfile({
+                //     displayName:data.displayName
+                // })
+                firebase.database().ref('/Users').push({
+                    name:data.name,
+                    role:data.role,
+                    email:data.email
                 })
                 console.log('User Registered successfully')
                 Alert.alert('User Registered successfully')
                 setData({
-                    displayName:'',
-                    username:'',
+                    name:'',
+                    role:'U',
+                    email:'',
                     password:'',
                     confirm_password:'',
                     //check_textInputChange: false,
@@ -160,18 +188,19 @@ const SignUpScreen = ({navigation}) => {
             style={styles.footer}
         >
             <ScrollView>
-          {/*  <Text style={styles.text_footer}>Email Address</Text>
+        
+            <Text style={[styles.text_footer, {marginTop: 35}]}>Name</Text>
             <View style={styles.action}>
                 <Feather 
-                    name="mail"
+                    name="user"
                     color="#05375a"
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Email Address"
+                    placeholder="Enter name"
                     style={styles.textInput}
                     autoCapitalize="none"
-                    //onChangeText={(val) => textInputChange(val)}
+                    onChangeText={(val) => nameInputChange(val)}
                 />
                 {data.check_textInputChange ? 
                 <Animatable.View
@@ -184,7 +213,13 @@ const SignUpScreen = ({navigation}) => {
                     />
                 </Animatable.View>
                 : null}
-                </View>*/}
+            </View>
+            { (data.name!='')? null : 
+            <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Enter your name</Text>
+            </Animatable.View>
+            }
+
             <Text style={[styles.text_footer, {marginTop: 35}]}>Email</Text>
             <View style={styles.action}>
                 <Feather 

@@ -30,7 +30,9 @@ const AddDevicesScreen = ({navigation}) => {
         age: '',
         sno:'',
         phoneNo: '',
-        date:''
+        date:'',
+        snoisValid:false,
+        pnoisValid:false
         
     });
 
@@ -69,14 +71,25 @@ const AddDevicesScreen = ({navigation}) => {
   }
 
     const handleSNoChange = (val) => {
-       
-        setData({
+
+        if(val.trim().length==8){
+         setData({
             ...data,
             sno: val,
             user:firebase.auth().currentUser.email,
-            date:new Date()
+            date:new Date(),
+            snoisValid:true
         });
-        
+        }else{
+            setData({
+                ...data,
+                sno: val,
+                user:firebase.auth().currentUser.email,
+                date:new Date(),
+                snoisValid:false
+            });
+            }
+
   }
 
     const handlePhoneNoChange = (val) => {
@@ -100,6 +113,8 @@ const AddDevicesScreen = ({navigation}) => {
     }else if((data.pname==null||data.cname==null||data.age==null||data.sno==null||data.phoneNo==null)){
         Alert.alert("Adding Failed","Please enter all required fields")
         return;
+        }else if(data.snoisValid==false){
+            Alert.alert("Adding Failed","Enter a Valid Serial Number")
         }else{
         firebase.database().ref('Confirmations').child(data.date.toString()).set(
             {
@@ -122,7 +137,8 @@ const AddDevicesScreen = ({navigation}) => {
                 age:'',
                 sno:'',
                 phoneNo:'',
-                date:new Date()
+                date:new Date(),
+                
             })
         
             
@@ -200,6 +216,7 @@ const AddDevicesScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Enter child age"
                     style={styles.textInput}
+                    maxLength={2}
                     autoCapitalize="none"
                     keyboardType="numeric"
                     onChangeText={(val) => handleAgeChange(val)}
@@ -231,10 +248,12 @@ const AddDevicesScreen = ({navigation}) => {
                 />
                 
             </View>
-            {data.sno ? null : 
+            {(data.snoisValid == false)?
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Required Field</Text>
-            </Animatable.View>}
+            <Text style={styles.errorMsg}>Number Should contain only 8 characters</Text>
+            </Animatable.View>
+            :null    
+        }
             { /*data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
@@ -251,7 +270,8 @@ const AddDevicesScreen = ({navigation}) => {
                 />
                 <TextInput 
                     keyboardType="phone-pad"
-                    placeholder="Enter User Mobile No"
+                    placeholder="Enter a valid phone number"
+                    maxLength={10}
                     onChangeText={(val) => handlePhoneNoChange(val)}
                     value={data.phoneNo}
                 />

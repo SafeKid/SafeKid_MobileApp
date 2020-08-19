@@ -110,7 +110,7 @@ export function DrawerContent(props) {
                                 />
                             )}
                             label="Manage Devices"
-                            onPress={() => {props.navigation.navigate('BookmarkScreen')}}
+                            onPress={() => {props.navigation.navigate('DevicesScreen')}}
                         />
                         
                         <DrawerItem 

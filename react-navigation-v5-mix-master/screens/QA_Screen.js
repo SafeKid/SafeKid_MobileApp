@@ -23,6 +23,7 @@ componentDidMount(){
       let dataList=[]
       snapshot.forEach((child) => {
         dataList.push({
+          date:child.val().date,
           user:child.val().user,
           name:child.val().name,
           title:child.val().title,
@@ -70,6 +71,7 @@ render(){
           //key is the index of the array 
           //item is the single item of the array
           <View key={key} style={{backgroundColor:'#CED8F6', borderColor:'black', borderWidth:2,margin:5}}>
+            <Text>{item.date}</Text>
             <Text>To admin:-</Text>
             <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>

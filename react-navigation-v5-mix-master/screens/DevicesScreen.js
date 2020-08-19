@@ -44,7 +44,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { color } from 'react-native-reanimated';
 
 var dataList=[];
-class BookmarkScreen extends React.Component{
+class DevicesScreen extends React.Component{
 
   constructor(props){
     super(props)
@@ -172,7 +172,7 @@ render(){
 };
 
 
-export default BookmarkScreen;
+export default DevicesScreen;
 
 const styles = StyleSheet.create({
   Header_text:{

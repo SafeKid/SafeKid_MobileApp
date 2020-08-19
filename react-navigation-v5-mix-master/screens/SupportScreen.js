@@ -27,7 +27,8 @@ const SupportScreen = ({navigation}) => {
         name:'',
         title: '',
         description: '',
-        respond:''
+        respond:'',
+        date: ''
         
     });
 
@@ -36,7 +37,8 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 name: val,
-                user:firebase.auth().currentUser.email
+                user:firebase.auth().currentUser.email,
+                date: new Date()
             });
         }
     
@@ -46,7 +48,8 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 title: val,
-                user:firebase.auth().currentUser.email
+                user:firebase.auth().currentUser.email,
+                date: new Date()
               });
       }
 
@@ -55,7 +58,8 @@ const SupportScreen = ({navigation}) => {
             setData({
                 ...data,
                 description: val,
-                user:firebase.auth().currentUser.email
+                user:firebase.auth().currentUser.email,
+                date: new Date()
             });
        
       
@@ -74,6 +78,7 @@ const SupportScreen = ({navigation}) => {
         }else{
         firebase.database().ref('Questions').push(
             {
+                date:data.date.getFullYear() + "-"+ parseInt(data.date.getMonth()+1) +"-"+data.date.getDate(),
                 user:data.user,
                 name:data.name,
                 title:data.title,
@@ -86,6 +91,8 @@ const SupportScreen = ({navigation}) => {
             Alert.alert('Message Sent Successfully')
             
             setData({
+
+                date:'',
                 user:firebase.auth().currentUser.email,
                 name:'',
                 title:'',

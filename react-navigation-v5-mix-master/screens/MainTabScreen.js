@@ -6,15 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './HomeScreen';
-import DetailsScreen from './DetailsScreen';
-import ExploreScreen from './ExploreScreen';
+import NotificationScreen from './NotificationScreen';
+import LocationScreen from './LocationScreen';
 import NewsScreen from './NewsScreen';
 
 
 const HomeStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
+const NotificationsStack = createStackNavigator();
 const NewsStack= createStackNavigator();
-const ExploreStack=createStackNavigator();
+const LocationStack=createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -36,7 +36,7 @@ const MainTabScreen = () => (
       />
       <Tab.Screen
         name="Notifications"
-        component={DetailsStackScreen}
+        component={NotificationsStackScreen}
         options={{
           tabBarLabel: 'Notifications',
           tabBarColor: '#1C1C1C',
@@ -57,8 +57,8 @@ const MainTabScreen = () => (
         }}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreStackScreen}
+        name="Location"
+        component={LocationStackScreen}
         options={{
           tabBarLabel: 'Location',
           tabBarColor: '#1C1C1C',
@@ -91,8 +91,8 @@ const HomeStackScreen = ({navigation}) => (
 </HomeStack.Navigator>
 );
 
-const DetailsStackScreen = ({navigation}) => (
-<DetailsStack.Navigator screenOptions={{
+const NotificationsStackScreen = ({navigation}) => (
+<NotificationsStack.Navigator screenOptions={{
         headerStyle: {
         backgroundColor: '#1C1C1C',
         },
@@ -101,12 +101,12 @@ const DetailsStackScreen = ({navigation}) => (
         fontWeight: 'bold'
         }
     }}>
-        <DetailsStack.Screen name="Notifications" component={DetailsScreen} options={{
+        <NotificationsStack.Screen name="Notifications" component={NotificationScreen} options={{
         headerLeft: () => (
             <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
         )
         }} />
-</DetailsStack.Navigator>
+</NotificationsStack.Navigator>
 );
 
 const NewsStackScreen = ({navigation}) => (
@@ -127,8 +127,8 @@ const NewsStackScreen = ({navigation}) => (
   </NewsStack.Navigator>
   );
   
-  const ExploreStackScreen = ({navigation}) => (
-    <ExploreStack.Navigator screenOptions={{
+  const LocationStackScreen = ({navigation}) => (
+    <LocationStack.Navigator screenOptions={{
             headerStyle: {
             backgroundColor: '#1C1C1C',
             },
@@ -137,12 +137,12 @@ const NewsStackScreen = ({navigation}) => (
             fontWeight: 'bold'
             }
         }}>
-            <ExploreStack.Screen name="Location" component={ExploreScreen} options={{
+            <LocationStack.Screen name="Location" component={LocationScreen} options={{
             headerLeft: () => (
                 <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
             )
             }} />
-    </ExploreStack.Navigator>
+    </LocationStack.Navigator>
     );
       
   

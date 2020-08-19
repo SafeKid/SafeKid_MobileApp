@@ -10,18 +10,18 @@ const ExploreScreen = () => {
        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
        style={styles.map}
        region={{
-         latitude: 37.78825,
-         longitude: -122.4324,
+         latitude: 6.910857,
+         longitude: 79.945024,
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
      >
        <Marker
        coordinate={{
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 6.910857,
+        longitude: 79.945024,
        }}
-       title="My Location"
+       title="My Home"
        description="This is my first location"
        />
     </MapView>
