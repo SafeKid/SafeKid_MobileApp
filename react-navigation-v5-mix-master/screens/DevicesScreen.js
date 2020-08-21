@@ -91,13 +91,7 @@ componentDidMount(){
 render(){
 
     return (
-      // <View style={styles.container}>
-      //   <Text>Previuos Cases</Text>
-      //   <Button
-      //     title="Click Here"
-      //     onPress={() => alert('Button Clicked!')}
-      //   />
-      // </View>
+     
       <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
         <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
@@ -106,32 +100,50 @@ render(){
        
       <ScrollView>
       
-        {/*Loop of JS which is like foreach loop*/}
+      
         {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
-          //key is the index of the array 
-          //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#A4A4A4', borderColor:'black', borderWidth:2}}>
+         
+          <View key={key} style={{backgroundColor:'#A4A4A4', margin:10, borderColor:'black', borderWidth:2}}>
             
             <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.sno}</Text>
             <Text style={styles.text}>{item.cname}</Text>
-            
+            <View style={{flexDirection:'row'}}>
+              
                 <TouchableOpacity
                 onPress={()=>{this.DeleteMessage(item._key)}}
                    style={[styles.signIn, {
                         borderColor: '#6E6E6E',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginLeft:280,
+                        marginRight:160,
                         backgroundColor:'#B40404',
-                        padding:15,
+                        width:70
+                       
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: 'white',
+                        fontSize:13
+                    }]}>Remove</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                onPress={()=>{this.props.navigation.navigate('TrackScreen')}}
+                   style={[styles.signIn, {
+                        borderColor: '#6E6E6E',
+                        borderWidth: 2,
+                        marginBottom:2,
+                        marginLeft:10,
+                        backgroundColor:'#086A87',
                         width:100
                        
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: 'white'
-                    }]}>Remove</Text>
+                        color: 'white',
+                        fontSize:15
+                    }]}>Track</Text>
                 </TouchableOpacity>
+             </View>
             <View style={styles.separator} />
           </View>:null
         ))}
@@ -210,7 +222,7 @@ signIn: {
     borderRadius: 10
 },
 textSign: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold'
 },
 signIn1: {

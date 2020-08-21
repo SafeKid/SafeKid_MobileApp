@@ -35,7 +35,7 @@ componentDidMount(){
       <View>
         
         <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
-          <Image source={require('../assets/logo-Transparent.png')} style={{width:130, height:120, marginLeft:100}}></Image>
+          <Image source={require('../assets/logo-Transparent.png')} style={{width:130, height:120, marginLeft:110}}></Image>
           {this.state.dataList.map((item, key) => ((item.email==firebase.auth().currentUser.email)?
          <View> 
         <Text style={{fontSize:40, fontWeight:"700", textAlign:"center",color:'#08298A'}}>Welcome</Text>

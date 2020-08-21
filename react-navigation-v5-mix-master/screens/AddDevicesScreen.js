@@ -31,6 +31,8 @@ const AddDevicesScreen = ({navigation}) => {
         sno:'',
         phoneNo: '',
         date:'',
+        lat:'',
+        long:'',
         snoisValid:false,
         pnoisValid:false
         
@@ -94,13 +96,24 @@ const AddDevicesScreen = ({navigation}) => {
 
     const handlePhoneNoChange = (val) => {
         
+        if(val.trim().length==10){
             setData({
                 ...data,
                 phoneNo: val,
                 user:firebase.auth().currentUser.email,
-                date:new Date()
+                date:new Date(),
+                pnoisValid:true,
             });
-       
+        }else{
+            setData({
+                ...data,
+                phoneNo: val,
+                user:firebase.auth().currentUser.email,
+                date:new Date(),
+                pnoisValid:false,
+            });
+        }
+
       
     }
 
@@ -115,6 +128,8 @@ const AddDevicesScreen = ({navigation}) => {
         return;
         }else if(data.snoisValid==false){
             Alert.alert("Adding Failed","Enter a Valid Serial Number")
+        }else if(data.pnoisValid==false){
+            Alert.alert("Adding Failed", "Enter Phone number Properly")    
         }else{
         firebase.database().ref('Confirmations').child(data.date.toString()).set(
             {
@@ -124,7 +139,9 @@ const AddDevicesScreen = ({navigation}) => {
                 age:data.age,
                 sno:data.sno,
                 phoneNo:data.phoneNo,
-                date:data.date
+                date:data.date,
+                lat:data.lat,
+                long:data.long
             }
         ).then(() => {
             console.log('INSERTED !')
@@ -137,6 +154,8 @@ const AddDevicesScreen = ({navigation}) => {
                 age:'',
                 sno:'',
                 phoneNo:'',
+                lat:'',
+                long:'',
                 date:new Date(),
                 
             })
@@ -169,7 +188,7 @@ const AddDevicesScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Enter parent name"
                     style={styles.textInput}
-                    autoCapitalize="none"
+                    autoCapitalize="none "
                     onChangeText={(val) => handlePNameChange(val)}
                     value={data.pname}
                 />
@@ -243,6 +262,7 @@ const AddDevicesScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     keyboardType="numeric"
+                    maxLength={8}
                     onChangeText={(val) => handleSNoChange(val)}
                     value={data.sno}
                 />
@@ -250,7 +270,7 @@ const AddDevicesScreen = ({navigation}) => {
             </View>
             {(data.snoisValid == false)?
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Number Should contain only 8 characters</Text>
+            <Text style={styles.errorMsg}>Number Should contain 8 characters</Text>
             </Animatable.View>
             :null    
         }
@@ -263,8 +283,8 @@ const AddDevicesScreen = ({navigation}) => {
                 marginTop: 35
             }]}>Phone no</Text>
             <View style={styles.action}>
-                <Feather 
-                    name="clipboard"
+                <Feather style={{marginTop:10,marginRight:10}}
+                    name="smartphone"
                     color="#05375a"
                     size={20}
                 />

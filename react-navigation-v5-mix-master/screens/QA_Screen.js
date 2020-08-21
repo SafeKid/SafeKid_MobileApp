@@ -27,7 +27,11 @@ componentDidMount(){
           user:child.val().user,
           name:child.val().name,
           title:child.val().title,
+          time:child.val().time,
+          respond:child.val().respond,
           description:child.val().description,
+          ndate:child.val().ndate,
+          ntime:child.val().ntime,
         //  respond:child.val().respond,
           _key:child.key
         });
@@ -70,10 +74,13 @@ render(){
         {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#CED8F6', borderColor:'black', borderWidth:2,margin:5}}>
+          <View key={key} style={{backgroundColor:'#A4A4A4', borderColor:'black', borderWidth:2,margin:5}}>
+            <View style={{flexDirection:'row'}}>
             <Text>{item.date}</Text>
+            <Text style={{marginLeft:240}}>{item.time}</Text>
+             </View>
             <Text>To admin:-</Text>
-            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
+           <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>
             
                 <TouchableOpacity
@@ -84,8 +91,37 @@ render(){
                         marginBottom:2,
                         marginLeft:280,
                         backgroundColor:'#8A0808',
-                        padding:15
                        
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: 'white'
+                    }]}>Delete</Text>
+                </TouchableOpacity>
+            <View style={styles.separator} />
+          </View>:null
+        ))}
+        {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
+          //key is the index of the array 
+          //item is the single item of the array
+          <View key={key} style={{backgroundColor:'#0489B1', borderColor:'black', borderWidth:2,margin:5}}>
+            <View style={{flexDirection:'row'}}>
+            <Text>{item.ndate}</Text>
+            <Text style={{marginLeft:240}}>{item.ntime}</Text>
+             </View>
+            <Text>Reply from admin:-</Text>
+           <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
+            <Text style={styles.text}>{item.respond}</Text>
+            
+                <TouchableOpacity
+                onPress={()=>{this.DeleteMessage(item._key)}}
+                   style={[styles.signIn, {
+                        borderColor: '#6E6E6E',
+                        borderWidth: 2,
+                        marginBottom:2,
+                        marginLeft:280,
+                        backgroundColor:'#8A0808',
+                        
                     }]}
                 >
                     <Text style={[styles.textSign, {
@@ -148,7 +184,7 @@ signIn: {
     borderRadius: 10
 },
 textSign: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold'
 },
 signIn1: {

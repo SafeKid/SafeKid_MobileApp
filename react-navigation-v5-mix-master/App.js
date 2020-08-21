@@ -30,6 +30,7 @@ import DevicesScreen from './screens/DevicesScreen';
 import ReviewScreen from './screens/ReviewScreen';
 import QA_Screen from './screens/QA_Screen';
 import AddDevicesScreen from './screens/AddDevicesScreen';
+import TrackScreen from './screens/TrackScreen';
 
 import { AuthContext } from './components/context';
 
@@ -180,6 +181,7 @@ const App = () => {
           <Drawer.Screen name="AddReviewScreen" component={AddReviewScreen}/>
           <Drawer.Screen name="QA_Screen" component={QA_Screen}/>
           <Drawer.Screen name="AddDevicesScreen" component={AddDevicesScreen}/>
+          <Drawer.Screen name="TrackScreen" component={TrackScreen}/>
         </Drawer.Navigator>
       )
     :

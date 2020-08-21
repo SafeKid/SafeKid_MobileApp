@@ -28,7 +28,11 @@ const SupportScreen = ({navigation}) => {
         title: '',
         description: '',
         respond:'',
-        date: ''
+        date: '',
+        time:'',
+        ndate:'',
+        ntime:''
+
         
     });
 
@@ -38,7 +42,8 @@ const SupportScreen = ({navigation}) => {
                 ...data,
                 name: val,
                 user:firebase.auth().currentUser.email,
-                date: new Date()
+                date: new Date(),
+                time: new Date() 
             });
         }
     
@@ -49,7 +54,8 @@ const SupportScreen = ({navigation}) => {
                 ...data,
                 title: val,
                 user:firebase.auth().currentUser.email,
-                date: new Date()
+                date: new Date(),
+                time: new Date()
               });
       }
 
@@ -59,7 +65,8 @@ const SupportScreen = ({navigation}) => {
                 ...data,
                 description: val,
                 user:firebase.auth().currentUser.email,
-                date: new Date()
+                date: new Date(),
+                time: new Date()
             });
        
       
@@ -76,14 +83,18 @@ const SupportScreen = ({navigation}) => {
         Alert.alert("Sending Failed","You must enter the description")
         return;
         }else{
-        firebase.database().ref('Questions').push(
+        
+        firebase.database().ref('Questions').child(data.date.toString()).set(
             {
                 date:data.date.getFullYear() + "-"+ parseInt(data.date.getMonth()+1) +"-"+data.date.getDate(),
+                time:data.date.getHours() + ":" + data.date.getMinutes(),
                 user:data.user,
                 name:data.name,
                 title:data.title,
                 description:data.description,
-                respond:data.respond
+                respond:data.respond,
+                ndate:data.ndate,
+                ntime:data.ntime
 
             }
         ).then(() => {
@@ -93,11 +104,14 @@ const SupportScreen = ({navigation}) => {
             setData({
 
                 date:'',
+                time:'',
                 user:firebase.auth().currentUser.email,
                 name:'',
                 title:'',
                 description:'',
-                respond:''
+                respond:'',
+                ndate:'',
+                ntime:''
             })
         
             

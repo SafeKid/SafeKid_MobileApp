@@ -17,12 +17,12 @@ class NewsScreen extends Component{
   });
 }
 componentDidMount(){
-    firebase.database().ref('/Reports').on('value',snapshot=>{
+    firebase.database().ref('/Previous_Cases').on('value',snapshot=>{
       //let data =snapshot.val();
       let dataList=[]
       snapshot.forEach((child) => {
         dataList.push({
-          city:child.val(),
+          city:child.key,
           village:child.key,
           date:child.key,
           description:child.key

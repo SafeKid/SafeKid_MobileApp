@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {Marker} from 'react-native-maps'
 
-const ExploreScreen = () => {
+const LocationScreen = () => {
     return (
       <View style={styles.container}>
      <MapView
@@ -29,7 +29,7 @@ const ExploreScreen = () => {
     );
 };
 
-export default ExploreScreen;
+export default LocationScreen;
 
 const styles = StyleSheet.create({
   container: {
