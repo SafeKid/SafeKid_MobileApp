@@ -25,7 +25,7 @@ import auth from '@react-native-firebase/auth';
 const SignInScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
-        username: '',
+        email: '',
         password: '',
         check_textInputChange: false,
         secureTextEntry: true,
@@ -44,14 +44,14 @@ const SignInScreen = ({navigation}) => {
         if( re.test(val)) {
             setData({
                 ...data,
-                username: val,
+                email: val,
                 check_textInputChange: true,
                 isValidEmail: true
             });
         } else {
             setData({
                 ...data,
-                username: val,
+                email: val,
                 check_textInputChange: false,
                 isValidEmail: false
             });
@@ -99,21 +99,21 @@ const SignInScreen = ({navigation}) => {
         }
     }*/
     
-   /* const loginHandle = (userName, password) => {
+   /* const loginHandle = (email, password) => {
 
       /*  const foundUser = Users.filter( item => {
-            return userName == item.username && password == item.password;
+            return email == item.email && password == item.password;
         } );
 
-        if ( data.username.length == 0 || data.password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+        if ( data.email.length == 0 || data.password.length == 0 ) {
+            Alert.alert('Wrong Input!', 'email or password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
             return;
         }
 
         if ( foundUser.length == 0 ) {
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+            Alert.alert('Invalid User!', 'email or password is incorrect.', [
                 {text: 'Okay'}
             ]);
             return;
@@ -123,12 +123,12 @@ const SignInScreen = ({navigation}) => {
 
     const userLogin=()=>{
 
-        if(data.username=='' || data.password==''){
+        if(data.email=='' || data.password==''){
             Alert.alert('Wrong Input!', 'Email or Password field cannot be empty.', [
                 {text: 'Okay'}
             ]);
             return;
-        }else if(data.username==null || data.password==null){
+        }else if(data.email==null || data.password==null){
             Alert.alert('Login Failed.', 'Make sure you entered credentials correctly.', [
                 {text: 'Okay'}
             ]);
@@ -138,13 +138,13 @@ const SignInScreen = ({navigation}) => {
             setData({
                 isLoading:true
             })
-            firebase.auth().signInWithEmailAndPassword(data.username,data.password).then((res)=>{
+            firebase.auth().signInWithEmailAndPassword(data.email,data.password).then((res)=>{
                 console.log(res)
                 console.log('User Logged in Successfully')
                 Alert.alert('Login Success')
                 setData({
                     displayName:'',
-                    username:'',
+                    email:'',
                     password:'',
                     check_textInputChange: false,
                     secureTextEntry: true,
@@ -212,7 +212,7 @@ const SignInScreen = ({navigation}) => {
                 </Animatable.View>
                 : null}
             </View>
-            { ((data.isValidEmail==true)||data.username==null ) ? null : 
+            { ((data.isValidEmail==true)||data.email==null ) ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>Email is badly formatted</Text>
             </Animatable.View>

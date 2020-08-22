@@ -34,7 +34,7 @@ export default LocationScreen;
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: 400,
+    height: 500,
     width: 400,
     justifyContent: 'flex-end',
     alignItems: 'center',

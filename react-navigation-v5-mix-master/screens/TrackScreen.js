@@ -3,8 +3,12 @@ import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {Marker} from 'react-native-maps'
 import  LinearGradient from 'react-native-linear-gradient'
+import firebase from '@react-native-firebase/app'
 
-const TrackScreen = ({navigation}) => {
+const TrackScreen=({route,navigation})=>{
+
+    let data=route.params;
+   
     return (
 
      <View>
@@ -13,19 +17,19 @@ const TrackScreen = ({navigation}) => {
         </View>
       <View style={styles.container}>
      <MapView
-       provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+       provider={PROVIDER_GOOGLE} 
        style={styles.map}
        region={{
-         latitude: 6.910857,
-         longitude: 79.945024,
+         latitude:parseFloat(data.lat),
+         longitude: parseFloat(data.long),
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
      >
        <Marker
        coordinate={{
-        latitude: 6.910857,
-        longitude: 79.945024,
+        latitude:parseFloat(data.lat),
+        longitude: parseFloat(data.long),
        }}
        title="My Home"
        description="This is my first location"
@@ -49,7 +53,9 @@ const TrackScreen = ({navigation}) => {
         </View>       
    </View>
     );
+
 };
+
 
 export default TrackScreen;
 

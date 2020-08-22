@@ -1,41 +1,4 @@
-/*import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
 
-
-
-const BookmarkScreen = ({navigation}) => {
-    return (
-      <View>
-        <View style={{backgroundColor:'#2E2E2E', height:50}}>
-          <Text style={styles.text}>Your Devices</Text>
-        </View>
-      <View>
-        <Text>Bookmark Screen</Text>
-        <Button
-          title="Add new Device"
-          onPress={() =>navigation.navigate('AddDevicesScreen') }
-        />
-      </View>
-      </View>
-    );
-};
-
-export default BookmarkScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
-  },
-  text:{
-    textAlign:"center",
-    color:"#FBF5EF",
-    fontWeight:"bold",
-    fontSize:25,
-    marginTop:5
-  }
-});*/
 import React, {useState, useEffect, Component}from 'react';
 import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground} from 'react-native';
 import firebase from '@react-native-firebase/app'
@@ -66,6 +29,8 @@ componentDidMount(){
           cname:child.val().cname,
           sno:child.val().sno,
           phoneNo:child.val().phoneNo,
+          lat:child.val().lat,
+          long:child.val().long,
           _key:child.key
         });
       });
@@ -127,7 +92,7 @@ render(){
                     }]}>Remove</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={()=>{this.props.navigation.navigate('TrackScreen')}}
+                onPress={()=>{this.props.navigation.navigate('TrackScreen',{lat:item.lat, long:item.long})}}
                    style={[styles.signIn, {
                         borderColor: '#6E6E6E',
                         borderWidth: 2,

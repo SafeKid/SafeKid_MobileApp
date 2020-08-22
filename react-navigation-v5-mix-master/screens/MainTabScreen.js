@@ -137,7 +137,7 @@ const NewsStackScreen = ({navigation}) => (
             fontWeight: 'bold'
             }
         }}>
-            <LocationStack.Screen name="Location" component={LocationScreen} options={{
+            <LocationStack.Screen name="Device Locations" component={LocationScreen} options={{
             headerLeft: () => (
                 <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
             )
