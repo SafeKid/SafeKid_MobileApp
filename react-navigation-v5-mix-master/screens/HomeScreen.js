@@ -33,7 +33,7 @@ componentDidMount(){
   render(){
     return (
       <View>
-        
+        <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
           <Image source={require('../assets/logo-Transparent.png')} style={{width:130, height:120, marginLeft:110}}></Image>
           {this.state.dataList.map((item, key) => ((item.email==firebase.auth().currentUser.email)?

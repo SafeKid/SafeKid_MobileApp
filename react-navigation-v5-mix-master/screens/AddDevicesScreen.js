@@ -188,7 +188,6 @@ const AddDevicesScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Enter parent name"
                     style={styles.textInput}
-                    autoCapitalize="none "
                     onChangeText={(val) => handlePNameChange(val)}
                     value={data.pname}
                 />
@@ -208,7 +207,6 @@ const AddDevicesScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Enter child name"
                     style={styles.textInput}
-                    autoCapitalize="none"
                     onChangeText={(val) => handleCNameChange(val)}
                     value={data.cname}
                 />
@@ -236,7 +234,6 @@ const AddDevicesScreen = ({navigation}) => {
                     placeholder="Enter child age"
                     style={styles.textInput}
                     maxLength={2}
-                    autoCapitalize="none"
                     keyboardType="numeric"
                     onChangeText={(val) => handleAgeChange(val)}
                     value={data.age}
@@ -260,7 +257,6 @@ const AddDevicesScreen = ({navigation}) => {
                 <TextInput 
                     placeholder="Enter device serial number"
                     style={styles.textInput}
-                    autoCapitalize="none"
                     keyboardType="numeric"
                     maxLength={8}
                     onChangeText={(val) => handleSNoChange(val)}

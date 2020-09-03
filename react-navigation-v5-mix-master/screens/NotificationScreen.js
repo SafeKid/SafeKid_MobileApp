@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, StatusBar} from 'react-native';
 
 const NotificationScreen = ({navigation}) => {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <Text>Notifications</Text>
         {/* <Button
             title="Go to details screen...again"

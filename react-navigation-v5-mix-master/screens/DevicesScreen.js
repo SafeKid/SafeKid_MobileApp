@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground} from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground, StatusBar} from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
@@ -59,6 +59,7 @@ render(){
      
       <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
+      <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
           <Text style={styles.Header_text}>Your Devices</Text>
         </View>

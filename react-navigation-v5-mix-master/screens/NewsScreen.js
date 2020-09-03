@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, StatusBar } from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 
@@ -22,11 +22,9 @@ componentDidMount(){
       let dataList=[]
       snapshot.forEach((child) => {
         dataList.push({
-          city:child.key,
-          village:child.key,
-          date:child.key,
-          description:child.key
-          
+          case:child.val().case1,
+          location:child.val().location,
+          date:child.val().date
         });
       });
       
@@ -37,23 +35,12 @@ componentDidMount(){
 render(){
 
     return (
-      // <View style={styles.container}>
-      //   <Text>Previuos Cases</Text>
-      //   <Button
-      //     title="Click Here"
-      //     onPress={() => alert('Button Clicked!')}
-      //   />
-      // </View>
-
       <View style={styles.container}>
+        <StatusBar backgroundColor='#000000' barStyle="light-content"/>
       <ScrollView>
-        {/*Loop of JS which is like foreach loop*/}
         {this.state.dataList.map((item, key) => (
-          //key is the index of the array 
-          //item is the single item of the array
           <View key={key} style={styles.item}>
-            <Text style={styles.text}>{item.city.toString()} | {item.village.toString()} | {item.date.toString()} | {item.description.toString()}</Text>
-            <View style={styles.separator} />
+            <Text style={styles.text}>{item.date} | {item.case} | {item.location}</Text>
           </View>
         ))}
       </ScrollView>
@@ -81,4 +68,11 @@ const styles = StyleSheet.create({
     color: '#606070',
     padding: 10,
   },
+  item: {
+    backgroundColor:'#F8E0E6',
+    borderColor:'black',
+    borderWidth:2,
+    margin:10
+
+  }
 });
