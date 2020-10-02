@@ -31,11 +31,10 @@ import ReviewScreen from './screens/ReviewScreen';
 import QA_Screen from './screens/QA_Screen';
 import AddDevicesScreen from './screens/AddDevicesScreen';
 import TrackScreen from './screens/TrackScreen';
-
 import { AuthContext } from './components/context';
 
 import RootStackScreen from './screens/RootStackScreen';
-
+import PhoneScreen from './screens/PhoneScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 import AddReviewScreen from './screens/AddReviewScreen';
 
@@ -182,6 +181,7 @@ const App = () => {
           <Drawer.Screen name="QA_Screen" component={QA_Screen}/>
           <Drawer.Screen name="AddDevicesScreen" component={AddDevicesScreen}/>
           <Drawer.Screen name="TrackScreen" component={TrackScreen}/>
+          <Drawer.Screen name="PhoneScreen" component={PhoneScreen}/>
         </Drawer.Navigator>
       )
     :

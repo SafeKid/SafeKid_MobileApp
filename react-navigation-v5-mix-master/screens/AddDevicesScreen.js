@@ -20,6 +20,7 @@ import firebase from'@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import { color } from 'react-native-reanimated';
+import NotificationScreen from './NotificationScreen';
 
 const AddDevicesScreen = ({navigation}) => {
 
@@ -146,7 +147,7 @@ const AddDevicesScreen = ({navigation}) => {
         ).then(() => {
             console.log('INSERTED !')
             Alert.alert('Request Sent Successfully','Your device will appear in your devices list after verifying')
-            
+    
             setData({
                 user:firebase.auth().currentUser.email,
                 pname:'',

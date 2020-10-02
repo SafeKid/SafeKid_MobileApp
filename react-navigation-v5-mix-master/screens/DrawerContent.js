@@ -99,7 +99,7 @@ export function DrawerContent(props) {
                                 />
                             )}
                             label="Emergency Contacts"
-                            onPress={() => {props.navigation.navigate('SettingScreen')}}
+                            onPress={() => {props.navigation.navigate('PhoneScreen')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (

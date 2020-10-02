@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   item: {
-    backgroundColor:'#F8E0E6',
+    backgroundColor:'lightgreen',
     borderColor:'black',
     borderWidth:2,
     margin:10
