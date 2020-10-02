@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Linking, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Button, StyleSheet, Linking, TouchableOpacity, Platform, ScrollView } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-const PhoneScreen = () => {
+const PhoneScreen = ({navigation}) => {
 
     const makeCall = (val) => {
 
@@ -17,10 +18,11 @@ const PhoneScreen = () => {
       };
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container}> 
         <View style={styles.header}>
             <Text style={{color:'white', textAlign:'center', fontSize:25}}>Emergency Contacts</Text>
         </View>
+        <ScrollView>
         <View style={styles.contact}>
         <Text style={styles.text1}>Police Emergency Service</Text>
         <View style={{flexDirection:'row'}}>
@@ -43,8 +45,23 @@ const PhoneScreen = () => {
                     }]}>Call</Text>
         </TouchableOpacity>
         </View>
+
         </View>
-        
+        </ScrollView>
+
+         <TouchableOpacity
+                    style={{marginBottom:10,width:200, marginLeft:100}}
+                    onPress={() =>navigation.goBack()}
+                >
+                <LinearGradient
+                    colors={['#1C1C1C', '#000000']}
+                    style={styles.signIn1}
+                >
+                    <Text style={[styles.textSign, {
+                        color:'#fff'
+                    }]}>Back</Text>
+                </LinearGradient>
+                </TouchableOpacity>
       </View>
     );
 };
@@ -84,5 +101,16 @@ signIn: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10
+},
+textSign: {
+    fontSize: 15,
+    fontWeight: 'bold'
+},
+signIn1: {
+  width: '100%',
+  height: 50,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 10
 },
 });
