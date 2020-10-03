@@ -36,7 +36,7 @@ class NotificationScreen extends React.Component{
       
       <View style={styles.container}>
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
-        {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
+        {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)?
         <View style={styles.textcard}>
         <Text style={{textAlign:'center', fontSize:15 }}>Pending your Device Confirmation ...</Text>
         <View style={styles.device}>

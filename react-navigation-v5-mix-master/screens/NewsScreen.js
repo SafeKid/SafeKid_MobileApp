@@ -38,7 +38,7 @@ render(){
       <View style={styles.container}>
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
       <ScrollView>
-        {this.state.dataList.map((item, key) => (
+        {this.state.dataList.reverse().map((item, key) => (
           <View key={key} style={styles.item}>
             <Text style={styles.text}>{item.date} | {item.case} | {item.location}</Text>
           </View>

@@ -71,7 +71,7 @@ render(){
       <View style={styles.container}>
       <ScrollView>
         {/*Loop of JS which is like foreach loop*/}
-        {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
+        {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)?
           //key is the index of the array 
           //item is the single item of the array
           <View key={key} style={{backgroundColor:'#A4A4A4', borderColor:'black', borderWidth:2,margin:5}}>
@@ -101,7 +101,7 @@ render(){
             <View style={styles.separator} />
           </View>:null
         ))}
-        {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
+        {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
           //key is the index of the array 
           //item is the single item of the array
           <View key={key} style={{backgroundColor:'#0489B1', borderColor:'black', borderWidth:2,margin:5}}>
