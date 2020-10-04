@@ -67,7 +67,7 @@ render(){
       // </View>
 
 
-      <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
+      <ImageBackground source={require('../assets/children.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
       <ScrollView>
         {/*Loop of JS which is like foreach loop*/}
@@ -79,7 +79,7 @@ render(){
             <Text>{item.date}</Text>
             <Text style={{marginLeft:240}}>{item.time}</Text>
              </View>
-            <Text>To admin:-</Text>
+            <Text style={{fontStyle:"italic"}}>To admin:-</Text>
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>
             
@@ -90,7 +90,7 @@ render(){
                         borderWidth: 2,
                         marginBottom:2,
                         marginLeft:280,
-                        backgroundColor:'#8A0808',
+                        backgroundColor:'#DF0101',
                        
                     }]}
                 >
@@ -104,12 +104,12 @@ render(){
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#0489B1', borderColor:'black', borderWidth:2,margin:5}}>
+          <View key={key} style={{backgroundColor:'#A9F5E1', borderColor:'black', borderWidth:2,margin:5}}>
             <View style={{flexDirection:'row'}}>
             <Text>{item.ndate}</Text>
             <Text style={{marginLeft:240}}>{item.ntime}</Text>
              </View>
-            <Text>Reply from admin:-</Text>
+            <Text style={{fontStyle:"italic"}}>Reply from admin:-</Text>
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.respond}</Text>
             
@@ -120,7 +120,7 @@ render(){
                         borderWidth: 2,
                         marginBottom:2,
                         marginLeft:280,
-                        backgroundColor:'#8A0808',
+                        backgroundColor:'#DF0101',
                         
                     }]}
                 >

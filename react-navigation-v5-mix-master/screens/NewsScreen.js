@@ -1,7 +1,8 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, StatusBar, ImageBackground } from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 
 var dataList=[];
@@ -35,16 +36,24 @@ componentDidMount(){
 render(){
 
     return (
+      <ImageBackground source={require('../assets/blood.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
+        
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
       <ScrollView>
         {this.state.dataList.reverse().map((item, key) => (
           <View key={key} style={styles.item}>
-            <Text style={styles.text}>{item.date} | {item.case} | {item.location}</Text>
+            <View style={{flexDirection:"row"}}>
+            <Text style={styles.text1}><Icon name="ios-calendar" size={26} /> {item.date}</Text>
+            <Text style={styles.text2}><Icon name="ios-pin" size={26} /> {item.location}</Text>
+            </View>
+            <Text style={styles.text3}>{item.case}</Text>
           </View>
         ))}
       </ScrollView>
+     
     </View>
+    </ImageBackground>
 
     );
         }
@@ -63,13 +72,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#707080',
     width: '100%',
   },
-  text: {
+  text1: {
     fontSize: 16,
     color: '#606070',
-    padding: 10,
+    paddingHorizontal:10,
+    paddingBottom:10,
+    paddingTop:10,
+    fontWeight:"bold",
+    marginRight:110
+    
+  },
+  text2: {
+    fontSize: 16,
+    color: '#606070',
+    paddingHorizontal:10,
+    paddingBottom:10,
+    paddingTop:10,
+    fontWeight:"bold",
+    textAlign:"right",
+    
+  },
+  text3: {
+    fontSize: 16,
+    color: '#606070',
+    paddingHorizontal:10,
+    paddingBottom:10,
+    fontWeight:"normal",
+    fontStyle:"italic",
+    textAlign:"center"
   },
   item: {
-    backgroundColor:'lightgreen',
+    backgroundColor:'#F8E0E6',
     borderColor:'black',
     borderWidth:2,
     margin:10

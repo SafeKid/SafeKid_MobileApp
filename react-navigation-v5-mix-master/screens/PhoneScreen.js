@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Linking, TouchableOpacity, Platform, ScrollView } from 'react-native';
+import { View, Text, Button, StyleSheet, Linking, TouchableOpacity, Platform, ScrollView, ImageBackground} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const PhoneScreen = ({navigation}) => {
@@ -18,6 +18,7 @@ const PhoneScreen = ({navigation}) => {
       };
 
     return (
+      <ImageBackground source={require('../assets/siren.png')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}> 
         <View style={styles.header}>
             <Text style={{color:'white', textAlign:'center', fontSize:25}}>Emergency Contacts</Text>
@@ -54,7 +55,7 @@ const PhoneScreen = ({navigation}) => {
                     onPress={() =>navigation.goBack()}
                 >
                 <LinearGradient
-                    colors={['#1C1C1C', '#000000']}
+                    colors={['#FF8000', '#3B240B']}
                     style={styles.signIn1}
                 >
                     <Text style={[styles.textSign, {
@@ -63,6 +64,7 @@ const PhoneScreen = ({navigation}) => {
                 </LinearGradient>
                 </TouchableOpacity>
       </View>
+      </ImageBackground>
     );
 };
 
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
       fontStyle:"italic",
   },
   text2:{
-    marginLeft:150,
+    marginLeft:130,
     fontSize:20,
     fontStyle:"normal",
     color:'#0040FF'

@@ -119,7 +119,7 @@ const NewsStackScreen = ({navigation}) => (
           fontWeight: 'bold'
           }
       }}>
-          <NewsStack.Screen name="News Feed" component={NewsScreen} options={{
+          <NewsStack.Screen name="Previous Cases" component={NewsScreen} options={{
           headerLeft: () => (
               <Icon.Button name="ios-menu" size={25} backgroundColor="#1C1C1C" onPress={() => navigation.openDrawer()}></Icon.Button>
           )

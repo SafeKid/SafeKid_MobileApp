@@ -57,7 +57,7 @@ render(){
 
     return (
      
-      <ImageBackground source={require('../assets/child.jpg')} style={{width:'100%', height:'100%'}}>
+      <ImageBackground source={require('../assets/children.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
       <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
@@ -170,11 +170,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'black',
     paddingLeft: 10,
     paddingRight:10,
-    textAlign:"center"
+    textAlign:"center",
+    fontStyle:"italic"
   },
   button: {
     alignItems: 'center',

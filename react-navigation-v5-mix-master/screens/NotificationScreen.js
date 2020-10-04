@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, StatusBar} from 'react-native';
+import { View, Text, Button, StyleSheet, StatusBar, ImageBackground} from 'react-native';
 import firebase from '@react-native-firebase/app';
 
 class NotificationScreen extends React.Component{
@@ -34,18 +34,20 @@ class NotificationScreen extends React.Component{
 
     return (
       
+      <ImageBackground source={require('../assets/child2.jpg')} style={{width:'100%', height:'100%'}}>
       <View style={styles.container}>
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)?
         <View style={styles.textcard}>
-        <Text style={{textAlign:'center', fontSize:15 }}>Pending your Device Confirmation ...</Text>
+        <Text style={{textAlign:'center', fontSize:15, fontStyle:"italic" }}>Pending your Device Confirmation ...</Text>
         <View style={styles.device}>
-        <Text style={{textAlign:'center'}}>{item.sno}</Text>
-        <Text style={{textAlign:'center'}}>{item.cname}</Text>
+        <Text style={{textAlign:'center', fontStyle:"italic", fontWeight:"bold", color:'#FBF8EF'}}>{item.sno}</Text>
+        <Text style={{textAlign:'center', fontStyle:"italic", fontWeight:"bold", color:'#FBF8EF'}}>{item.cname}</Text>
         </View>
         </View>:null
         ))}
       </View>
+      </ImageBackground>
     );
         }
   };
@@ -57,17 +59,19 @@ const styles = StyleSheet.create({
     flex:1, 
   },
   textcard:{
-    backgroundColor:'lightblue',
+    backgroundColor:'#E0E0F8',
     margin:10,
     borderWidth:2,
     borderRadius:15
   },
   device:{
-    borderColor:'green',
+    borderColor:'#071914',
     borderWidth:2,
     margin:10,
     marginHorizontal:50,
-    borderRadius:20
+    borderRadius:20,
+    backgroundColor:'#088A68'
+
   }
   
 });
