@@ -86,12 +86,12 @@ render(){
           <View key={key} style={{backgroundColor:'#E0F2F7', borderColor:'black', borderWidth:2,marginHorizontal:30, marginVertical:10}}>
             <View style={{flexDirection:'row'}}>
             <Text>{item.date}</Text>
-            <Text style={{marginLeft:240}}>{item.time}</Text>
+            <Text style={{marginLeft:180}}>{item.time}</Text>
              </View>
          <Icon name="user-circle" style={{marginLeft:10}} size={25}/>    
         <Text style={{fontStyle:"italic"}}><Text style={{fontWeight:"bold"}}>  {item.name}</Text> ({item.user})</Text>
            <Text style={{fontWeight:"bold", fontSize:20, textAlign:'center', marginTop:20}}>{item.title}</Text>
-            <Text style={styles.text}>{item.description}</Text>
+            <Text style={styles.text1}>{item.description}</Text>
             {((item.respond!='')?
             <View style={{backgroundColor:'#31B404',marginHorizontal:50, borderRadius:20, marginVertical:10, paddingVertical:20}}>
                 <Text style={{fontStyle:'italic', fontWeight:'bold', textAlign:'center'}}>  Reply from Admin:-</Text>
@@ -107,7 +107,7 @@ render(){
                         borderColor: '#6E6E6E',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginLeft:280,
+                        marginLeft:220,
                         backgroundColor:'#DF0101',
                        
                     }]}
@@ -119,7 +119,7 @@ render(){
                 :null)}
             <View style={styles.separator} />
           </View>
-        ))}
+         ))}
        
       </ScrollView>
       <View style={{flexDirection:"row"}}>
@@ -177,6 +177,14 @@ const styles = StyleSheet.create({
     paddingRight:10,
     textAlign:"center",
     
+  },
+  text1: {
+    fontSize: 16,
+    color: 'black',
+    paddingLeft: 10,
+    paddingRight:10,
+    textAlign:"center",
+    marginBottom:20
   },
   button: {
     alignItems: 'center',

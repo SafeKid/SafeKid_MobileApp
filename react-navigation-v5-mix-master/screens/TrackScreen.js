@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity,Alert } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {Marker} from 'react-native-maps'
 import  LinearGradient from 'react-native-linear-gradient'
@@ -10,12 +10,12 @@ const TrackScreen=({route,navigation})=>{
     let data=route.params;
    
     return (
-
      <View>
      <View style={{backgroundColor:'#1C1C1C', height:50, marginBottom:10}}>
           <Text style={styles.Header_text}>Current Location</Text>
         </View>
       <View style={styles.container}>
+      {((data.lat!='' && data.long!='')?
      <MapView
        provider={PROVIDER_GOOGLE} 
        style={styles.map}
@@ -35,6 +35,9 @@ const TrackScreen=({route,navigation})=>{
        description="This is my first location"
        />
     </MapView>
+        
+    :
+    Alert.alert("Failed to find the location", "may be an issue with the device connection"))}
     </View>
     <View>
     <TouchableOpacity
