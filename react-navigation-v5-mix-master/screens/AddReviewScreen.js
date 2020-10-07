@@ -18,15 +18,21 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import firebase from'@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
-import database from '@react-native-firebase/database';
 import { color } from 'react-native-reanimated';
 
 const AddReviewScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
+        user:'',
         name:'',
         title: '',
         description: '',
+        respond:'',
+        date: '',
+        time:'',
+        ndate:'',
+        ntime:''
+
         
     });
 
@@ -35,6 +41,9 @@ const AddReviewScreen = ({navigation}) => {
             setData({
                 ...data,
                 name: val,
+                user:firebase.auth().currentUser.email,
+                date: new Date(),
+                time: new Date() 
             });
         }
     
@@ -44,6 +53,9 @@ const AddReviewScreen = ({navigation}) => {
             setData({
                 ...data,
                 title: val,
+                user:firebase.auth().currentUser.email,
+                date: new Date(),
+                time: new Date()
               });
       }
 
@@ -52,17 +64,67 @@ const AddReviewScreen = ({navigation}) => {
             setData({
                 ...data,
                 description: val,
+                user:firebase.auth().currentUser.email,
+                date: new Date(),
+                time: new Date()
             });
        
       
     }
 
-   
+  
+    const sendMessage=()=>{
+
+        if((data.description=='')){
+            Alert.alert("Sending Failed","You must enter the description")
+             return;
+        
+    }else if((data.description==null)){
+        Alert.alert("Sending Failed","You must enter the description")
+        return;
+        }else{
+        
+        firebase.database().ref('Reviews').child(data.date.toString()).set(
+            {
+                date:data.date.getFullYear() + "-"+ parseInt(data.date.getMonth()+1) +"-"+data.date.getDate(),
+                time:data.date.getHours() + ":" + data.date.getMinutes(),
+                user:data.user,
+                name:data.name,
+                title:data.title,
+                description:data.description,
+                respond:data.respond,
+                ndate:data.ndate,
+                ntime:data.ntime
+
+            }
+        ).then(() => {
+            console.log('INSERTED !')
+            Alert.alert('Message Sent Successfully')
+            
+            setData({
+
+                date:'',
+                time:'',
+                user:firebase.auth().currentUser.email,
+                name:'',
+                title:'',
+                description:'',
+                respond:'',
+                ndate:'',
+                ntime:''
+            })
+        
+            
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+    }
         return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Add Your Comments</Text>
+            <Text style={styles.text_header}>Add Your Comment About Us</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"
@@ -81,6 +143,7 @@ const AddReviewScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handleNameChange(val)}
+                    value={data.name}
                 />
                
             </View>
@@ -104,6 +167,7 @@ const AddReviewScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => handleTitleChange(val)}
+                    value={data.title}
                 />
                 
             </View>
@@ -114,7 +178,7 @@ const AddReviewScreen = ({navigation}) => {
             */}
             <Text style={[styles.text_footer, {
                 marginTop: 35
-            }]}>Description</Text>
+            }]}>Description<Text style={{color:'#610B0B', fontSize:12}}>     **Required</Text></Text>
             <View style={styles.action}>
                 <Feather 
                     name="clipboard"
@@ -128,6 +192,7 @@ const AddReviewScreen = ({navigation}) => {
                     numberOfLines={20}
                     multiline={true}
                     onChangeText={(val) => handleDescriptionChange(val)}
+                    value={data.description}
                 />
             
                
@@ -141,25 +206,25 @@ const AddReviewScreen = ({navigation}) => {
                     onPress={() => sendMessage()}
                 >
                 <LinearGradient
-                    colors={['#6E6E6E', '#585858']}
+                    colors={['#424242', '#151515']}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
                         color:'#fff'
-                    }]}>Send</Text>
+                    }]}>Add Review</Text>
                 </LinearGradient>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#424242',
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#6E6E6E'
+                        color: '#424242'
                     }]}>Back</Text>
                 </TouchableOpacity>
             </View>
@@ -174,13 +239,15 @@ export default AddReviewScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#585858'
+      backgroundColor: '#1C1C1C'
     },
     header: {
         flex: 1,
         justifyContent: 'flex-end',
         paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingTop: 20,
+        paddingBottom:30,
+        
     },
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
@@ -193,7 +260,9 @@ const styles = StyleSheet.create({
     text_header: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 25,
+        fontStyle:"italic"
+
         
     },
     errorMsg: {

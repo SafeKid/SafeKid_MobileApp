@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert,ImageBackground } from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert,ImageBackground, ActivityIndicator} from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,9 +14,15 @@ class QA_Screen extends React.Component{
 
   
   this.state=({
-    dataList:[]
+    dataList:[],
+    animating:true
   });
 }
+      
+closeActivityIndicator=()=>{
+  setTimeout(()=>this.setState({animating:false}),100)
+}
+
 componentDidMount(){
     firebase.database().ref('/Questions').on('value',snapshot=>{
       //let data =snapshot.val();
@@ -38,6 +44,7 @@ componentDidMount(){
       });
       
      this.setState({dataList:dataList})
+     this.closeActivityIndicator()
     });
 
  
@@ -57,29 +64,29 @@ componentDidMount(){
 
 render(){
 
+  const animating=this.state.animating
     return (
-      // <View style={styles.container}>
-      //   <Text>Previuos Cases</Text>
-      //   <Button
-      //     title="Click Here"
-      //     onPress={() => alert('Button Clicked!')}
-      //   />
-      // </View>
-
-
       <ImageBackground source={require('../assets/children.jpg')} style={{width:'100%', height:'100%'}}>
+       <View style={{margin:10}}>
+        <ActivityIndicator
+         animating={animating}
+         color="#bc2b78"
+         size="large"
+         style={styles.indicator}
+        />
+        </View>
       <View style={styles.container}>
       <ScrollView>
         {/*Loop of JS which is like foreach loop*/}
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)?
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#A4A4A4', borderColor:'black', borderWidth:2,margin:5}}>
+          <View key={key} style={{borderRadius:20,backgroundColor:'#A9F5E1', borderColor:'black', borderWidth:2,marginLeft:50, marginVertical:10}}>
             <View style={{flexDirection:'row'}}>
-            <Text>{item.date}</Text>
-            <Text style={{marginLeft:240}}>{item.time}</Text>
+            <Text>  {item.date}</Text>
+            <Text style={{marginLeft:180}}>{item.time}</Text>
              </View>
-            <Text style={{fontStyle:"italic"}}>To admin:-</Text>
+            <Text style={{fontStyle:"italic"}}>  To admin:-</Text>
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>
             
@@ -89,7 +96,7 @@ render(){
                         borderColor: '#6E6E6E',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginLeft:280,
+                        marginLeft:230,
                         backgroundColor:'#DF0101',
                        
                     }]}
@@ -104,12 +111,12 @@ render(){
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#A9F5E1', borderColor:'black', borderWidth:2,margin:5}}>
+          <View key={key} style={{borderRadius:20,backgroundColor:'#E0F2F7', borderColor:'black', borderWidth:2,marginRight:50, marginVertical:10}}>
             <View style={{flexDirection:'row'}}>
-            <Text>{item.ndate}</Text>
-            <Text style={{marginLeft:240}}>{item.ntime}</Text>
+            <Text>  {item.ndate}</Text>
+            <Text style={{marginLeft:180}}>{item.ntime}</Text>
              </View>
-            <Text style={{fontStyle:"italic"}}>Reply from admin:-</Text>
+            <Text style={{fontStyle:"italic"}}> Reply from admin:-</Text>
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.respond}</Text>
             
@@ -119,7 +126,7 @@ render(){
                         borderColor: '#6E6E6E',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginLeft:280,
+                        marginLeft:230,
                         backgroundColor:'#DF0101',
                         
                     }]}
@@ -194,4 +201,10 @@ signIn1: {
   alignItems: 'center',
   borderRadius: 10
 },
+indicator:{
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center',
+  height:50
+}
 });

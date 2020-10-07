@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground, StatusBar} from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert, ImageBackground, StatusBar, ActivityIndicator} from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
@@ -15,9 +15,15 @@ class DevicesScreen extends React.Component{
 
   
   this.state=({
-    dataList:[]
+    dataList:[],
+    animating:true
   });
 }
+    
+closeActivityIndicator=()=>{
+  setTimeout(()=>this.setState({animating:false}),200)
+}
+
 componentDidMount(){
     firebase.database().ref('/Devices').on('value',snapshot=>{
       //let data =snapshot.val();
@@ -36,6 +42,7 @@ componentDidMount(){
       });
       
      this.setState({dataList:dataList})
+     this.closeActivityIndicator()
     });
 
  
@@ -55,6 +62,7 @@ componentDidMount(){
 
 render(){
 
+    const animating=this.state.animating
     return (
      
       <ImageBackground source={require('../assets/children.jpg')} style={{width:'100%', height:'100%'}}>
@@ -64,12 +72,20 @@ render(){
           <Text style={styles.Header_text}>Your Devices</Text>
         </View>
        
+        <View style={{margin:10}}> 
+         <ActivityIndicator
+         animating={animating}
+         color="#bc2b78"
+         size="large"
+         style={styles.indicator}
+        />
+        </View>
       <ScrollView>
       
       
         {this.state.dataList.map((item, key) => ((item.user==firebase.auth().currentUser.email)?
          
-          <View key={key} style={{backgroundColor:'#A4A4A4', margin:10, borderColor:'black', borderWidth:2}}>
+          <View key={key} style={{backgroundColor:'#E6E6E6', margin:10, borderColor:'black', borderWidth:2, borderRadius:20}}>
             
             <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.sno}</Text>
             <Text style={styles.text}>{item.cname}</Text>
@@ -78,11 +94,12 @@ render(){
                 <TouchableOpacity
                 onPress={()=>{this.DeleteMessage(item._key)}}
                    style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#3B0B0B',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginRight:160,
-                        backgroundColor:'#B40404',
+                        marginRight:150,
+                        marginLeft:10,
+                        backgroundColor:'#FF0000',
                         width:70
                        
                     }]}
@@ -95,11 +112,10 @@ render(){
                 <TouchableOpacity
                 onPress={()=>{this.props.navigation.navigate('TrackScreen',{lat:item.lat, long:item.long})}}
                    style={[styles.signIn, {
-                        borderColor: '#6E6E6E',
+                        borderColor: '#0B6138',
                         borderWidth: 2,
                         marginBottom:2,
-                        marginLeft:10,
-                        backgroundColor:'#086A87',
+                        backgroundColor:'#04B431',
                         width:100
                        
                     }]}
@@ -110,7 +126,7 @@ render(){
                     }]}>Track</Text>
                 </TouchableOpacity>
              </View>
-            <View style={styles.separator} />
+            {/* <View style={styles.separator} /> */}
           </View>:null
         ))}
         
@@ -199,4 +215,10 @@ signIn1: {
   alignItems: 'center',
   borderRadius: 10
 },
+indicator:{
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center',
+  height:50
+}
 });

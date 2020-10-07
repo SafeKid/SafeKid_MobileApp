@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, StatusBar, ImageBackground } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, StatusBar,ActivityIndicator,ImageBackground } from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -14,9 +14,16 @@ class NewsScreen extends Component{
 
   
   this.state=({
-    dataList:[]
+    dataList:[],
+    animating:true
   });
 }
+
+closeActivityIndicator=()=>{
+  setTimeout(()=>this.setState({animating:false}),500)
+}
+
+
 componentDidMount(){
     firebase.database().ref('/Previous_Cases').on('value',snapshot=>{
       //let data =snapshot.val();
@@ -30,15 +37,25 @@ componentDidMount(){
       });
       
      this.setState({dataList:dataList})
+     
+    this.closeActivityIndicator()
     });
+   
 
 }
 render(){
 
+    const animating=this.state.animating
     return (
       <ImageBackground source={require('../assets/blood.jpg')} style={{width:'100%', height:'100%'}}>
-      <View style={styles.container}>
-        
+      <View style={{margin:15}}>
+        <ActivityIndicator
+         animating={animating}
+         color="#bc2b78"
+         size="large"
+         style={styles.indicator}
+        /> 
+      </View>
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
       <ScrollView>
         {this.state.dataList.reverse().map((item, key) => (
@@ -52,7 +69,7 @@ render(){
         ))}
       </ScrollView>
      
-    </View>
+   
     </ImageBackground>
 
     );
@@ -107,5 +124,11 @@ const styles = StyleSheet.create({
     borderWidth:2,
     margin:10
 
+  },
+  indicator:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    height:70
   }
 });
