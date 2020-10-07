@@ -52,9 +52,9 @@ closeActivityIndicator=()=>{
          style={styles.indicator}
         />
         </View>
-        <ScrollView>
+         <ScrollView>
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)? 
-       <View style={styles.textcard}>
+       <View key={key} style={styles.textcard}>
         <Text style={{textAlign:'center', fontSize:15, fontStyle:"italic" }}>Pending your Device Confirmation ...</Text>
         <View style={styles.device}>
         <Text style={{textAlign:'center', fontStyle:"italic", fontWeight:"bold", color:'#FBF8EF'}}>{item.sno}</Text>
