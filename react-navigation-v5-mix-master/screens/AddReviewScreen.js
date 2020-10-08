@@ -3,7 +3,8 @@ import {
     View, 
     Text, 
     Button, 
-    TouchableOpacity, 
+    TouchableOpacity,
+    TouchableWithoutFeedback, 
     Dimensions,
     TextInput,
     Platform,
@@ -18,7 +19,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import firebase from'@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
-import { color } from 'react-native-reanimated';
+import Animated, { color } from 'react-native-reanimated';
 
 const AddReviewScreen = ({navigation}) => {
 
@@ -31,7 +32,8 @@ const AddReviewScreen = ({navigation}) => {
         date: '',
         time:'',
         ndate:'',
-        ntime:''
+        ntime:'',
+        rating:''
 
         
     });
@@ -47,6 +49,15 @@ const AddReviewScreen = ({navigation}) => {
             });
         }
     
+    const handleRating=(val)=>{
+        setData({
+            ...data,
+            rating:val,
+            user:firebase.auth().currentUser.email,
+            date: new Date(),
+            time: new Date()
+        })
+    } 
 
     const handleTitleChange = (val) => {
        
@@ -72,7 +83,6 @@ const AddReviewScreen = ({navigation}) => {
       
     }
 
-  
     const sendMessage=()=>{
 
         if((data.description=='')){
@@ -94,12 +104,13 @@ const AddReviewScreen = ({navigation}) => {
                 description:data.description,
                 respond:data.respond,
                 ndate:data.ndate,
-                ntime:data.ntime
+                ntime:data.ntime,
+                rating:data.rating
 
             }
         ).then(() => {
             console.log('INSERTED !')
-            Alert.alert('Message Sent Successfully')
+            Alert.alert('Review Added')
             
             setData({
 
@@ -111,7 +122,8 @@ const AddReviewScreen = ({navigation}) => {
                 description:'',
                 respond:'',
                 ndate:'',
-                ntime:''
+                ntime:'',
+                rating:''
             })
         
             
@@ -121,6 +133,7 @@ const AddReviewScreen = ({navigation}) => {
     }
     }
         return (
+            
       <View style={styles.container}>
           <StatusBar backgroundColor='#1C1C1C' barStyle="light-content"/>
         <View style={styles.header}>
@@ -153,6 +166,35 @@ const AddReviewScreen = ({navigation}) => {
             </Animatable.View>
             */}
 
+            <Text style={[styles.text_footer, {marginTop: 35,marginBottom:20}]}>Rating</Text>
+            <View style={{flexDirection:'row'}}>
+            <TouchableWithoutFeedback> 
+             <Animated.View>     
+                <FontAwesome onPress={()=>handleRating('1')} onLongPress={()=>handleRating('0')} name={(data.rating=='1'||data.rating=='2'||data.rating=='3'||data.rating=='4'||data.rating=='5')?"star":"star-o"} color="orange" size={32} style={{marginHorizontal:10}}/>
+             </Animated.View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback> 
+             <Animated.View>     
+                <FontAwesome onPress={()=>handleRating('2')} onLongPress={()=>handleRating('0')} name={(data.rating=='2'||data.rating=='3'||data.rating=='4'||data.rating=='5')?"star":"star-o"} color="orange" size={32} style={{marginHorizontal:10}}/>
+             </Animated.View>
+            </TouchableWithoutFeedback> 
+            <TouchableWithoutFeedback> 
+             <Animated.View>     
+                <FontAwesome onPress={()=>handleRating('3')} onLongPress={()=>handleRating('0')} name={(data.rating=='3'||data.rating=='4'||data.rating=='5')?"star":"star-o"} color="orange" size={32} style={{marginHorizontal:10}}/>
+             </Animated.View>
+            </TouchableWithoutFeedback>  
+            <TouchableWithoutFeedback> 
+             <Animated.View>     
+                <FontAwesome onPress={()=>handleRating('4')} onLongPress={()=>handleRating('0')} name={(data.rating=='4'||data.rating=='5')?"star":"star-o"} color="orange" size={32} style={{marginHorizontal:10}}/>
+             </Animated.View>
+            </TouchableWithoutFeedback> 
+            <TouchableWithoutFeedback> 
+             <Animated.View>     
+                <FontAwesome onPress={()=>handleRating('5')} onLongPress={()=>handleRating('0')} name={(data.rating=='5')?"star":"star-o"} color="orange" size={32} style={{marginHorizontal:10}}/>
+             </Animated.View>
+            </TouchableWithoutFeedback> 
+        
+            </View>
             <Text style={[styles.text_footer, {
                 marginTop: 35
             }]}>Title</Text>

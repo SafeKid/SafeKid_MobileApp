@@ -39,6 +39,7 @@ componentDidMount(){
           description:child.val().description,
           ndate:child.val().ndate,
           ntime:child.val().ntime,
+          rating:child.val().rating,
         //  respond:child.val().respond,
           _key:child.key
         });
@@ -64,7 +65,7 @@ componentDidMount(){
 }
 
 render(){
-
+    
     const animating=this.state.animating
     return (
     
@@ -90,6 +91,14 @@ render(){
              </View>
          <Icon name="user-circle" style={{marginLeft:10}} size={25}/>    
         <Text style={{fontStyle:"italic"}}><Text style={{fontWeight:"bold"}}>  {item.name}</Text> ({item.user})</Text>
+        <View style={{flexDirection:'row'}}>
+           <Icon name={(item.rating=='1'||item.rating=='2'||item.rating=='3'||item.rating=='4'||item.rating=='5')?"star":"star-o"} color="orange" size={20} style={{marginHorizontal:5}}/>
+           <Icon name={(item.rating=='2'||item.rating=='3'||item.rating=='4'||item.rating=='5')?"star":"star-o"} color="orange" size={20} style={{marginHorizontal:5}}/>
+           <Icon name={(item.rating=='3'||item.rating=='4'||item.rating=='5')?"star":"star-o"} color="orange" size={20} style={{marginHorizontal:5}}/>
+           <Icon name={(item.rating=='4'||item.rating=='5')?"star":"star-o"} color="orange" size={20} style={{marginHorizontal:5}}/>
+           <Icon name={(item.rating=='5')?"star":"star-o"} color="orange" size={20} style={{marginHorizontal:5}}/>
+
+            </View>
            <Text style={{fontWeight:"bold", fontSize:20, textAlign:'center', marginTop:20}}>{item.title}</Text>
             <Text style={styles.text1}>{item.description}</Text>
             {((item.respond!='')?
