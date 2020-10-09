@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Linking, TouchableOpacity, Platform, ScrollView, ImageBackground} from 'react-native';
+import { View, Text, StyleSheet, Linking, TouchableOpacity, Platform, ScrollView, ImageBackground} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {Card,Button} from 'react-native-paper'
 
 const PhoneScreen = ({navigation}) => {
 
@@ -24,7 +25,14 @@ const PhoneScreen = ({navigation}) => {
             <Text style={{color:'white', textAlign:'center', fontSize:25}}>Emergency Contacts</Text>
         </View>
         <ScrollView>
-        <View style={styles.contact}>
+         <Card style={{marginHorizontal:30,marginVertical:20}}>
+         <Card.Title title="Police Emergency Service" subtitle="119"  />
+         <Button style={{marginLeft:200, width:100}}icon="phone" mode="contained" onPress={() => makeCall('119')}>
+          Call
+        </Button>
+           </Card> 
+        
+        {/* <View style={styles.contact}>
         <Text style={styles.text1}>Police Emergency Service</Text>
         <View style={{flexDirection:'row'}}>
         <Text style={styles.text2}>119</Text>
@@ -45,9 +53,10 @@ const PhoneScreen = ({navigation}) => {
                         fontSize:15
                     }]}>Call</Text>
         </TouchableOpacity>
+       
         </View>
 
-        </View>
+        </View> */}
         </ScrollView>
 
          <TouchableOpacity
