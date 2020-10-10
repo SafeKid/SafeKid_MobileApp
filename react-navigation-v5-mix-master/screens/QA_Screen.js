@@ -1,9 +1,10 @@
 import React, {useState, useEffect, Component}from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView, Alert,ImageBackground, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert,ImageBackground, ActivityIndicator} from 'react-native';
 import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
 import { color } from 'react-native-reanimated';
+import {IconButton} from 'react-native-paper';
 
 var dataList=[];
 class QA_Screen extends React.Component{
@@ -90,7 +91,7 @@ render(){
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.description}</Text>
             
-                <TouchableOpacity
+                {/* <TouchableOpacity
                 onPress={()=>{this.DeleteMessage(item._key)}}
                    style={[styles.signIn, {
                         borderColor: '#6E6E6E',
@@ -104,8 +105,8 @@ render(){
                     <Text style={[styles.textSign, {
                         color: 'white'
                     }]}>Delete</Text>
-                </TouchableOpacity>
-            <View style={styles.separator} />
+                </TouchableOpacity> */}
+           <IconButton icon="delete" color="red" size={23} style={{marginLeft:250}} onPress={()=>{this.DeleteMessage(item._key)}}></IconButton>
           </View>:null
         ))}
         {this.state.dataList.reverse().map((item, key) => ((item.user==firebase.auth().currentUser.email)&&(item.respond!='')?
@@ -120,7 +121,7 @@ render(){
            <Text style={styles.text,{fontWeight:"bold", fontSize:20, textAlign:'center'}}>{item.title}</Text>
             <Text style={styles.text}>{item.respond}</Text>
             
-                <TouchableOpacity
+                {/* <TouchableOpacity
                 onPress={()=>{this.DeleteMessage(item._key)}}
                    style={[styles.signIn, {
                         borderColor: '#6E6E6E',
@@ -134,7 +135,8 @@ render(){
                     <Text style={[styles.textSign, {
                         color: 'white'
                     }]}>Delete</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <IconButton icon="delete" color="red" size={23} style={{marginLeft:250}} onPress={()=>{this.DeleteMessage(item._key)}}></IconButton>
             <View style={styles.separator} />
           </View>:null
         ))}

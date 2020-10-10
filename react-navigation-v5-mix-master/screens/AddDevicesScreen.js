@@ -132,7 +132,7 @@ const AddDevicesScreen = ({navigation}) => {
         }else if(data.pnoisValid==false){
             Alert.alert("Adding Failed", "Enter Phone number Properly")    
         }else{
-        firebase.database().ref('Confirmations').child(data.date.toString()).set(
+        firebase.database().ref('Confirmations').child(data.sno).set(
             {
                 user:data.user,
                 pname:data.pname,

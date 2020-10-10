@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet,StatusBar } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {Marker} from 'react-native-maps'
+import firebase from '@react-native-firebase/app'
+import react from 'react';
 
-const LocationScreen = () => {
+class LocationScreen extends React.Component{
+
+  constructor(props){
+    super(props)
+
+    this.state=({dataList:[]})
+
+  }
+
+
+componentDidMount(){
+    firebase.database().ref('/Devices').on('value',snapshot=>{
+      //let data =snapshot.val();
+      let dataList=[]
+      snapshot.forEach((child) => {
+        dataList.push({
+          user:child.val().user,
+          pname:child.val().pname,
+          cname:child.val().cname,
+          sno:child.val().sno,
+          age:child.val().age,
+          lat:child.val().lat,
+          long:child.val().long,
+          _key:child.key
+        });
+      });
+      
+      this.setState({dataList:dataList})
+  })
+}
+
+render(){
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor='#000000' barStyle="light-content"/>
@@ -13,30 +46,32 @@ const LocationScreen = () => {
        region={{
          latitude: 6.910857,
          longitude: 79.945024,
-         latitudeDelta: 1.015,
-         longitudeDelta: 1.0121,
+         latitudeDelta: 2.015,
+         longitudeDelta: 2.0121,
        }}
      >
-       <Marker
+       {this.state.dataList.reverse().map((item, key) => (((item.user==firebase.auth().currentUser.email)&&(item.lat||item.long!=''))?
+       <Marker key={key}
        coordinate={{
-        latitude: 6.910857,
-        longitude: 79.945024,
+        latitude: parseFloat(item.lat),
+        longitude: parseFloat(item.long),
        }}
-       title="My Home"
-       description="This is my first location"
-       />
-        <Marker
+       title={""+item.sno}
+       description={item.cname}
+       />:null))}
+        {/* <Marker
        coordinate={{
         latitude: 7.286575,
         longitude: 80.626975,
        }}
        title="My Home"
        description="This is my first location"
-       />
+       /> */}
     </MapView>
    </View>
     );
 };
+}
 
 export default LocationScreen;
 

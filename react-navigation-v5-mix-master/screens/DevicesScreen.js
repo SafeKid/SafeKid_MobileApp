@@ -5,7 +5,7 @@ import firebase from '@react-native-firebase/app'
 import database from '@react-native-firebase/database'
 import LinearGradient from 'react-native-linear-gradient';
 import { color } from 'react-native-reanimated';
-import {Button, Card, Title, Paragraph} from 'react-native-paper'
+import {Button, Card, Title, Paragraph, Modal, TextInput} from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
@@ -19,13 +19,22 @@ class DevicesScreen extends React.Component{
   
   this.state=({
     dataList:[],
-    animating:true
+    animating:true,
+    visible:false
     
   });
 }
     
 closeActivityIndicator=()=>{
   setTimeout(()=>this.setState({animating:false}),200)
+}
+
+showModal=()=>{
+  this.setState({visible:true})
+}
+
+hideModal=()=>{
+  this.setState({visible:false})
 }
 
 componentDidMount(){
@@ -133,6 +142,8 @@ render(){
           //    </View>
           //   {/* <View style={styles.separator} /> */}
           // </View>
+
+          
           <Card key={key} style={styles.item}>
             
           {/* <Card.Title title="Card Title"  left={LeftContent} />
@@ -142,18 +153,22 @@ render(){
             <View style={{flexDirection:'column'}}>
                <View style={{flexDirection:'row'}}> 
                 <Title> {item.sno}</Title>
-                <Icon name="md-watch" size={50} style={{marginLeft:100}}/> 
+                <Icon name="logo-rss" size={50} style={{marginLeft:100}}/> 
                </View> 
             <Title style={{marginBottom:10}}> {item.cname}</Title>
             </View>
            <Paragraph style={styles.text3}>   Age: {item.age}</Paragraph>
+           
           </Card.Content>
           {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
+          
           <Card.Actions>
-          <Button icon="delete" color="red" mode="contained" style={{marginRight:90}} onPress={()=>{this.DeleteMessage(item._key)}}>
+          <Button icon="delete" color="red" mode="contained" style={{marginRight:20}} onPress={()=>{this.DeleteMessage(item._key)}}>
               Remove
            </Button>
-           <Button icon="map-marker" color="blue" mode="contained" onPress={()=>{this.props.navigation.navigate('TrackScreen',{lat:item.lat, long:item.long})}}>
+           
+          <Button color="blue" mode="outlined" style={{marginRight:20}} onPress={()=>{this.showModal()}}>Edit</Button>
+           <Button icon="map-marker" color="blue" mode="contained" onPress={()=>{this.props.navigation.navigate('TrackScreen',{lat:item.lat, long:item.long, sno:item.no, cname:item.cname})}}>
              Track
            </Button>
           </Card.Actions>
@@ -161,6 +176,23 @@ render(){
           :null ))}
         
       </ScrollView>
+      <Modal visible={this.state.visible} contentContainerStyle={{backgroundColor:'white', margin:20}} onDismiss={()=>{this.hideModal()}}>
+           <View style={{flexDirection:'row'}}>  
+          <Button color="orange" mode="contained" style={{marginRight:20}}>Update</Button>
+          <Button color="red" mode="contained" onPress={()=>{this.hideModal()}}>Close</Button>
+          </View>
+           <TextInput
+              label="Name"
+              //  value={text}
+              //  onChangeText={text => setText(text)}
+             />
+              <TextInput
+              label="Age"
+              //  value={text}
+              //  onChangeText={text => setText(text)}
+             />
+           
+          </Modal>
       <TouchableOpacity
                     style={styles.signIn, {marginBottom:10,width:200, marginLeft:100}}
                     onPress={() =>this.props.navigation.navigate('AddDevicesScreen')}

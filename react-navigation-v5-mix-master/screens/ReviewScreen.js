@@ -84,7 +84,7 @@ render(){
         {this.state.dataList.reverse().map((item, key) => (
           //key is the index of the array 
           //item is the single item of the array
-          <View key={key} style={{backgroundColor:'#E0F2F7', borderColor:'black', borderWidth:2,marginHorizontal:30, marginVertical:10}}>
+          <View key={key} style={{backgroundColor:'#EFFBFB', borderColor:'black', borderWidth:2,marginHorizontal:30, marginVertical:10}}>
             <View style={{flexDirection:'row'}}>
             <Text>{item.date}</Text>
             <Text style={{marginLeft:180}}>{item.time}</Text>
@@ -102,7 +102,7 @@ render(){
            <Text style={{fontWeight:"bold", fontSize:20, textAlign:'center', marginTop:20}}>{item.title}</Text>
             <Text style={styles.text1}>{item.description}</Text>
             {((item.respond!='')?
-            <View style={{backgroundColor:'#31B404',marginHorizontal:50, borderRadius:20, marginVertical:10, paddingVertical:20}}>
+            <View style={{backgroundColor:'#9FF781',marginHorizontal:50, borderRadius:20, marginVertical:10, paddingVertical:20, borderWidth:2, borderColor:'#0B3B24'}}>
                 <Text style={{fontStyle:'italic', fontWeight:'bold', textAlign:'center'}}>  Reply from Admin:-</Text>
                 <Text style={styles.text}>  {item.respond}</Text>
             </View>    
