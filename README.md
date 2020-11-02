@@ -1,4 +1,8 @@
 # SafeKid_MobileApp
+
+The mobile app for SafeKid, developed using react-native and firebase
+
+
  
 To run this:-
 
